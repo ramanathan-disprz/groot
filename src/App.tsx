@@ -6,28 +6,32 @@ import {
   LoginScreen,
   RegisterScreen
 } from './pages';
+import BaseRouteGuard from "./components/BaseRouteGuard";
 
 function App() {
   return (
     <Router basename="ui">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginScreen />} />
-        <Route path="/register" element={<RegisterScreen />} />
-      </Routes>
+      <BaseRouteGuard>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginScreen />} />
+          <Route path="/register" element={<RegisterScreen />} />
+          <Route path="/ram" element={<Home />} />
+        </Routes>
 
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-        toastOptions={{
-          duration: 3000,
-          style: {
-            background: "#fff",
-            color: "#333",
-            fontWeight:"initial"
-          },
-        }}
-      />
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: "#fff",
+              color: "#333",
+              fontWeight: "initial"
+            },
+          }}
+        />
+      </BaseRouteGuard>
     </Router>
   )
 }

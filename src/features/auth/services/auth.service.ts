@@ -6,6 +6,7 @@ import {
     RegisterRequest,
     RegisterResponse
 } from "../"; // points to the auth folder
+import { AuthCookie } from "../../../utils/AuthCookie";
 
 export const AuthService = {
 
@@ -15,6 +16,11 @@ export const AuthService = {
 
     register: (payload: RegisterRequest) => {
         return ApiService.post<RegisterResponse, RegisterRequest>(`${URLConstants.REGISTER}`, payload);
+    },
+
+    logout: async (): Promise<void> => {
+        AuthCookie.clearToken();
+        // queryClient.clear(); // wipe cached API data
     }
 
 };
