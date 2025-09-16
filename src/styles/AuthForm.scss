@@ -1,0 +1,100 @@
+// src/styles/LoginForm.scss
+@import "./variables";
+
+.login-form {
+  width: 24rem;
+  padding: $spacing-lg;
+  background-color: $color-white;
+  border-radius: $border-radius;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: $color-text;
+
+  &__title {
+    text-align: center;
+    font-size: $font-xl;
+    font-weight: 600;
+    margin-bottom: $spacing-md;
+  }
+
+  &__icon {
+    margin-right: $spacing-xs;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $spacing-md;
+
+    label {
+      font-weight: 600;
+      margin-bottom: $spacing-xs;
+      font-size: $font-base;
+    }
+
+    input,
+    select {
+      padding: $spacing-sm;
+      font-size: $font-base;
+      border: 1px solid $color-primary;
+      border-radius: $border-radius;
+      outline: none;
+
+      &:focus {
+        border-color: darken($color-primary, 10%);
+      }
+    }
+  }
+
+  &__submit {
+    width: 100%;
+    padding: $spacing-sm;
+    font-size: $font-base;
+    font-weight: 600;
+    color: $color-white;
+    background-color: $color-primary;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// Add these styles to your existing LoginForm.scss
+
+.login-form__register-link {
+  text-align: center;
+  margin: 1rem 0;
+  
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+  }
+}
+
+.login-form__register-link-text {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+  
+  &:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  &:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  
+  &:active {
+    color: #004085;
+  }
+}
+

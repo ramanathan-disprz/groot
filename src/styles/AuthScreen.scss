@@ -1,0 +1,20 @@
+// src/styles/LoginScreen.scss
+@import "./variables";
+
+.login-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $color-secondary;
+
+  &__logo {
+    margin-bottom: $spacing-xl;
+
+    img {
+      width: 10rem;
+      object-fit: contain;
+    }
+  }
+}
