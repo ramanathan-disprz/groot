@@ -15,31 +15,31 @@ const sampleEvents: CalendarEvent[] = [
     {
         id: '1',
         title: 'Morning Meeting',
-        startTime: new Date('2025-09-17T00:00:00').toISOString(),
-        endTime: new Date('2025-09-17T01:00:00').toISOString(),
+        startTime: new Date('2025-09-18T00:00:00').toISOString(),
+        endTime: new Date('2025-09-18T02:00:00').toISOString(),
         color: '#d6680eff'
     },
     {
         id: '2',
         title: 'Lunch Break',
-        startTime: new Date('2025-09-17T12:00:00').toISOString(),
-        endTime: new Date('2025-09-17T13:00:00').toISOString(),
-        color: '#d6680eff'
+        startTime: new Date('2025-09-18T02:00:00').toISOString(),
+        endTime: new Date('2025-09-18T19:00:00').toISOString(),
+        color: '#4ad60eff'
 
     },
     {
         id: '3',
         title: 'Project Discussion',
-        startTime: new Date('2025-09-17T15:00:00').toISOString(),
-        endTime: new Date('2025-09-17T16:30:00').toISOString(),
-        color: '#d6680eff'
+        startTime: new Date('2025-09-18T21:00:00').toISOString(),
+        endTime: new Date('2025-09-18T24:00:00').toISOString(),
+        color: '#0ec2d6ff'
     },
     {
         id: '4',
         title: 'Evening Workout',
-        startTime: new Date('2025-09-17T18:00:00').toISOString(),
-        endTime: new Date('2025-09-17T19:00:00').toISOString(),
-        color: '#d6680eff'
+        startTime: new Date('2025-09-18T00:00:00').toISOString(),
+        endTime: new Date('2025-09-18T03:00:00').toISOString(),
+        color: '#d60e93ff'
 
     }
 ];

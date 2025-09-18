@@ -1,4 +1,3 @@
-
 import { addDays, formatDayLabel } from "../../utils/dates";
 
 type Props = {

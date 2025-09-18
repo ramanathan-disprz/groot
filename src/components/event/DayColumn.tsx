@@ -16,8 +16,19 @@ function timeToString(iso: string) {
     return new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
 }
 
-const DayColumn: React.FC<Props> = ({ date, events = [], hourHeight = 60 }) => {
+function calculatePosition(start: Date, end: Date, hourHeight: number) {
+    const hoursBeforeStart = start.getHours();
+    const top = hoursBeforeStart * (hourHeight) + (hoursBeforeStart * 0.9);
+
+    const durationInHours = Math.floor((end.getTime() - start.getTime()) / 3600000);
+    const hourLinesDuringEvent = Math.max(0, durationInHours - 1);
+    const height = Math.max(0, durationInHours * hourHeight + (hourLinesDuringEvent * 0.9));
+    return { top, height };
+}
+
+const DayColumn: React.FC<Props> = ({ date, events = [], hourHeight = 120 }) => {
     const containerHeight = hourHeight * 24;
+
     const dayEvents = useMemo(() => {
         return events.filter(e => {
             const s = new Date(e.startTime);
@@ -27,13 +38,15 @@ const DayColumn: React.FC<Props> = ({ date, events = [], hourHeight = 60 }) => {
 
     const now = new Date();
     const showNow = isSameDay(now, date);
-    const nowTop = (minutesFromStartOfDay(now) / 60) * hourHeight;
+    const duration = minutesFromStartOfDay(now) / 60;
+    const nowTop = (duration * 0.9) + (duration) * hourHeight;
 
     return (
         <div className="day-column">
             <div className="day-header">{date.toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' })}</div>
 
             <div className="hours-grid" style={{ height: `${containerHeight}px` }}>
+
                 {Array.from({ length: 24 }).map((_, h) => (
                     <div className="hour-row" key={h} style={{ height: `${hourHeight}px` }}>
                         <div className="hour-label">{String(h).padStart(2, '0')}:00</div>
@@ -44,8 +57,8 @@ const DayColumn: React.FC<Props> = ({ date, events = [], hourHeight = 60 }) => {
                 {dayEvents.map(evt => {
                     const start = new Date(evt.startTime);
                     const end = new Date(evt.endTime);
-                    const top = (minutesFromStartOfDay(start) / 60) * hourHeight;
-                    const height = ((end.getTime() - start.getTime()) / (1000 * 60)) / 60 * hourHeight;
+                    const { top, height } = calculatePosition(start, end, hourHeight);
+                    console.log(`Event: ${evt.title}, Start: ${start}, Top: ${top}px, Height: ${height}px`);
                     return (
                         <div
                             key={evt.id}

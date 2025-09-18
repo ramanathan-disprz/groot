@@ -3,8 +3,8 @@ import { Toaster } from "react-hot-toast";
 import './App.css';
 import {
   Home,
-  LoginScreen,
-  RegisterScreen,
+  Login,
+  Register,
   Event,
 } from './pages';
 import BaseRouteGuard from "./components/BaseRouteGuard";
@@ -15,9 +15,10 @@ function App() {
       <BaseRouteGuard>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginScreen />} />
-          <Route path="/register" element={<RegisterScreen />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/events" element={<Event />} />
+          <Route path="/test" element={<Register />} />
         </Routes>
 
         <Toaster

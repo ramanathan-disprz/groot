@@ -33,7 +33,7 @@
     justify-content: center;
     align-items: center;
     flex-basis: 100%;
-    margin-left: 8%;
+    margin-left: 6%;
   }
 
   .right {
@@ -63,7 +63,7 @@
     .day {
       min-width: 44px;
       border-radius: 22px;
-      padding: 6px 8px;
+      padding: 6px 20px;
       text-align: center;
       background: transparent;
       border: none;
@@ -76,7 +76,7 @@
       }
 
       .date {
-        font-size: 16px;
+        font-size: 20px;
         font-weight: 600;
       }
 
@@ -136,11 +136,11 @@
   background: $panel;
   border-radius: 10px;
   position: relative;
-  overflow: hidden;
+  margin: 1% 0;
+
 
   .day-header {
     padding: 10px;
-    font-weight: 600;
     border-bottom: 1px solid rgba(255, 255, 255, 0.411);
   }
 
@@ -151,7 +151,6 @@
       display: flex;
       align-items: stretch;
       border-bottom: 1px solid rgba(255, 255, 255, 0.17);
-
 
       .hour-label {
         width: 56px;
@@ -170,7 +169,7 @@
       position: absolute;
       left: 72px;
       right: 12px;
-      padding: 6px;
+      padding: 0 1rem;
       border-radius: 8px;
       background: linear-gradient(180deg, rgba(255, 69, 58, 0.12), rgba(255, 69, 58, 0.08));
       border-left: 4px solid $accent;
@@ -200,8 +199,8 @@
 
       .time-bubble {
         position: absolute;
-        left: -0.2rem; 
-        top: -10px; 
+        left: -0.2rem;
+        top: -10px;
         background: $accent;
         color: #fff;
         padding: 4px 8px;
