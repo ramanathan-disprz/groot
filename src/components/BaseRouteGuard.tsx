@@ -10,9 +10,7 @@ const BaseRouteGuard: React.FC<BaseRouteGuardProps> = ({ children }) => {
     const location = useLocation();
     const path = location.pathname;
 
-    const publicPaths = ["/login", "/register"];
-
-    if (publicPaths.includes(path) && !AuthCookie.isAuthenticated()) {
+    if (!AuthCookie.isAuthenticated()) {
         const redirectTo = path;
         return <Navigate to={`/login?redirectTo=${redirectTo}`} replace />;
     }

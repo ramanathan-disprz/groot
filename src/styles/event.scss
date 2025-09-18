@@ -5,10 +5,9 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   color: #fff;
   background: $bg;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
 }
 
 .calendar-top {
@@ -117,6 +116,9 @@
   padding: 12px;
   display: flex;
   gap: 12px;
+  overflow-y: auto;
+  padding-bottom: 5rem;
+  margin-bottom: 3.2rem;
 }
 
 /* Multi-day / single day layout */
@@ -212,6 +214,43 @@
     }
   }
 }
+
+.event-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #1a1a1a;
+  border-top: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0rem;
+  z-index: 100;
+  flex: 0 0 auto;
+
+  &__btn {
+    background: transparent;
+    color: $accent;
+    border: none;
+    font-size: 1rem;
+    margin: 0 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+      font-weight: 600;
+    }
+
+    &--add {
+      font-weight: 600;
+    }
+  }
+}
+
+
 
 /* Responsiveness */
 @media (max-width: 900px) {

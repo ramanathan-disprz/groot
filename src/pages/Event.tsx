@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarEvent, ViewMode } from '../models/event';
 import { addDays } from "../utils/dates";
 
 import {
     WeekSlider,
-    SingleDayView, 
-    MultiDayView, 
-    ViewModeToggle
+    SingleDayView,
+    MultiDayView,
+    ViewModeToggle,
+    BottomBar
 } from "../components/event";
 
 import "../styles/event.scss";
+import toast from "react-hot-toast";
 
 const sampleEvents: CalendarEvent[] = [
     {
@@ -22,8 +24,8 @@ const sampleEvents: CalendarEvent[] = [
     {
         id: '2',
         title: 'Lunch Break',
-        startTime: new Date('2025-09-18T02:00:00').toISOString(),
-        endTime: new Date('2025-09-18T19:00:00').toISOString(),
+        startTime: new Date('2025-09-18T15:01:00').toISOString(),
+        endTime: new Date('2025-09-18T17:00:00').toISOString(),
         color: '#4ad60eff'
 
     },
@@ -46,6 +48,11 @@ const sampleEvents: CalendarEvent[] = [
 
 type Props = {}
 const Event: React.FC<Props> = ({ }) => {
+
+    useEffect(() => {
+        toast.success("Welcome")
+    });
+
     const [centerDate, setCenterDate] = useState<Date>(new Date());
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [mode, setMode] = useState<ViewMode>('multi');
@@ -57,6 +64,7 @@ const Event: React.FC<Props> = ({ }) => {
 
     return (
         <div className="calendar-shell">
+
             <header className="calendar-top">
                 <div className="left">
                     <h2>{monthName}</h2>
@@ -80,6 +88,12 @@ const Event: React.FC<Props> = ({ }) => {
                 {mode === 'multi' && <MultiDayView startDate={selectedDate} events={sampleEvents} />}
                 {mode === 'list' && <div className="list-view">List view not implemented yet</div>}
             </main>
+
+            <BottomBar
+                onToday={() => setSelectedDate(new Date())}
+                onAddEvent={() => alert("Add Event clicked")}
+            />
+
         </div>
     );
 };
