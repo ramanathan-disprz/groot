@@ -1,0 +1,226 @@
+// src/styles/LoginScreen.scss
+@import "./variables";
+
+.calendar-shell {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #fff;
+  background: $bg;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.calendar-top {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+
+  .left {
+    flex: 0 0 auto;
+
+    h2 {
+      color: $accent;
+      margin: 0;
+    }
+  }
+
+  .center {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 100%;
+    margin-left: 8%;
+  }
+
+  .right {
+    flex: 0 0 auto;
+  }
+}
+
+.week-slider {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  .chev {
+    background: transparent;
+    border: none;
+    color: $accent;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .days-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px;
+
+    .day {
+      min-width: 44px;
+      border-radius: 22px;
+      padding: 6px 8px;
+      text-align: center;
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+
+      .dow {
+        font-size: 12px;
+        color: $muted;
+      }
+
+      .date {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      &.selected {
+        background: rgba($accent, 0.12);
+        box-shadow: 0 0 0 2px rgba($accent, 0.12) inset;
+
+        .date {
+          color: $accent;
+        }
+      }
+    }
+  }
+}
+
+.view-toggle {
+  display: inline-flex;
+  gap: 6px;
+
+  button {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &.active {
+      border-color: $accent;
+      color: $accent;
+      background: rgba($accent, 0.06);
+    }
+  }
+}
+
+.calendar-main {
+  flex: 1 1 auto;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+}
+
+/* Multi-day / single day layout */
+.multi-day-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1 1 auto;
+}
+
+.single-day-view {
+  flex: 1 1 auto;
+}
+
+/* Day column */
+.day-column {
+  background: $panel;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+
+  .day-header {
+    padding: 10px;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.411);
+  }
+
+  .hours-grid {
+    position: relative;
+
+    .hour-row {
+      display: flex;
+      align-items: stretch;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.17);
+
+
+      .hour-label {
+        width: 56px;
+        font-size: 12px;
+        color: $muted;
+        padding: 6px;
+        flex: 0 0 auto;
+      }
+
+      .hour-line {
+        flex: 1 1 auto;
+      }
+    }
+
+    .event-pill {
+      position: absolute;
+      left: 72px;
+      right: 12px;
+      padding: 6px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255, 69, 58, 0.12), rgba(255, 69, 58, 0.08));
+      border-left: 4px solid $accent;
+      color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      cursor: pointer;
+
+      .time {
+        opacity: 0.8;
+        font-size: 12px;
+        margin-left: 8px;
+      }
+    }
+
+    .now-line {
+      position: absolute;
+      left: 64px;
+      right: 12px;
+      height: 2px;
+      background: $accent;
+      transform: translateY(-1px);
+      box-shadow: 0 0 6px rgba(255, 69, 58, 0.6);
+
+      .time-bubble {
+        position: absolute;
+        left: -0.2rem; 
+        top: -10px; 
+        background: $accent;
+        color: #fff;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        white-space: nowrap;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .multi-day-view {
+    grid-template-columns: 1fr;
+  }
+
+  .day-column .hours-grid .hour-row .hour-label {
+    width: 48px;
+  }
+}

@@ -1,0 +1,72 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 5vh;
+  background: rgba(0, 0, 0, 0.8);
+  
+  color: #fff;
+  text-align: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  gap: 1.5rem;
+}
+
+.dateIcon {
+  margin-bottom: 0;
+}
+
+.textContainer {
+  margin-top: -2rem;
+}
+
+.actionContainer {
+  margin-top: 2rem; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; 
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #d1d1d1;
+  max-width: 500px;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.signInBtn {
+  padding: 0.75rem 2rem;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-bottom: 0;
+
+  &:hover {
+    background: #e5e5e5;
+  }
+}
+
+.learnMore {
+  color: #2997ff;
+  text-decoration: none;
+  font-size: 1rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

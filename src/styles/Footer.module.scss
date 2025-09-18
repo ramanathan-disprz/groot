@@ -1,0 +1,108 @@
+.footer {
+  background: rgba(0, 0, 0, 0);
+  color: #aaa;
+  padding: 1rem; // Reduced padding to decrease height
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  .links {
+    margin-top: 0.5rem; // Adjusted margin
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    a {
+      color: #aaa;
+      margin: 0 0.5rem; // Reduced margin
+      text-decoration: none;
+      transition: color 0.3s;
+      white-space: nowrap;
+
+      &:hover {
+        color: #fff;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .copyright {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  // Tablet styles (768px and below)
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 1rem; // Reduced padding
+    gap: 1rem;
+
+    .links {
+      margin-top: 0;
+      justify-content: center;
+      
+      a {
+        margin: 0 0.5rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    .copyright {
+      order: 2;
+      font-size: 0.9rem;
+    }
+  }
+
+  // Mobile styles (480px and below)
+  @media (max-width: 480px) {
+    padding: 0.5rem; // Further reduced padding
+    gap: 0.5rem;
+
+    .links {
+      flex-direction: column;
+      gap: 0.5rem;
+      
+      a {
+        margin: 0;
+        font-size: 1rem;
+        padding: 0.5rem;
+      }
+    }
+
+    .copyright {
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  }
+
+  // Large screens (1200px and above)
+  @media (min-width: 1200px) {
+    padding: 2rem; // Adjusted padding for larger screens
+    
+    .links a {
+      margin: 0 1rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  // Extra small screens (320px and below)
+  @media (max-width: 320px) {
+    padding: 0.5rem; // Reduced padding
+    
+    .links a {
+      font-size: 0.9rem;
+      padding: 0.25rem;
+    }
+    
+    .copyright {
+      font-size: 0.75rem;
+    }
+  }
+}

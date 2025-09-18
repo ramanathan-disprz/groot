@@ -20,7 +20,7 @@ const LoginScreen: React.FC = () => {
       const apiError: APIErrorResponse = error.response?.data;
       toast.error(apiError.Message || "Login Failed");
     },
-    onSuccess: (data) => {
+    onSuccess: (data : LoginResponse) => {
       AuthCookie.setToken(data)
       toast.success("Login successful!");
       navigate(redirectTo, { replace: true });

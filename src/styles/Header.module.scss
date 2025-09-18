@@ -1,0 +1,39 @@
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0); // Ensure this is semi-transparent
+  backdrop-filter: blur(10px); // Apply blur effect
+  -webkit-backdrop-filter: blur(10px); // Safari support
+  z-index: 1000;
+  transition: backdrop-filter 0.3s ease;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); // Text shadow for better visibility
+}
+
+.menuBtn {
+  font-size: 1.5rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); // Text shadow for better visibility
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

@@ -4,7 +4,8 @@ import './App.css';
 import {
   Home,
   LoginScreen,
-  RegisterScreen
+  RegisterScreen,
+  Event,
 } from './pages';
 import BaseRouteGuard from "./components/BaseRouteGuard";
 
@@ -16,7 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
-          <Route path="/ram" element={<Home />} />
+          <Route path="/events" element={<Event />} />
         </Routes>
 
         <Toaster
