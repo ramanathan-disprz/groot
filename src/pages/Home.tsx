@@ -1,7 +1,8 @@
-import React from "react";
-import Header from "../components/home/Header";
-import Hero from "../components/home/Hero";
-import Footer from "../components/home/Footer";
+import {
+  Header,
+  Hero,
+  Footer
+} from '../components/home';
 
 const HomeScreen: React.FC = () => {
   return (

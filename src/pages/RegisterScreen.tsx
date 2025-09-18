@@ -1,12 +1,15 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { APIErrorResponse, RegisterRequest } from "../features/auth/dtos";
-import "../styles/AuthScreen.scss";
-import RegisterForm from "../components/RegisterForm";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { AuthService } from "../features/auth";
 
+import RegisterForm from "../components/RegisterForm";
+import {
+    APIErrorResponse,
+    RegisterRequest,
+    AuthService
+} from "../features/auth";
+
+import "../styles/AuthScreen.scss";
 
 const RegisterScreen: React.FC = () => {
     const navigate = useNavigate();

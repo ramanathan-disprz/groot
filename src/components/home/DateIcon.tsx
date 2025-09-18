@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "../../styles/DateIcon.module.scss";
 
 const DateIcon: React.FC = () => {

@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "../../styles/Hero.module.scss";
-import DateIcon from "./DateIcon";
 import { useNavigate } from "react-router-dom";
+import {DateIcon} from "./";
+
+import styles from "../../styles/Hero.module.scss";
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();

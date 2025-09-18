@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { CalendarEvent, ViewMode } from '../models/event';
 import { addDays } from "../utils/dates";
-import WeekSlider from "../components/event/WeekSlider";
-import ViewModeToggle from "../components/event/ViewModeToggle";
-import MultiDayView from "../components/event/MultiDayView";
-import SingleDayView from "../components/event/SingleDayView";
+
+import {
+    WeekSlider,
+    SingleDayView, 
+    MultiDayView, 
+    ViewModeToggle
+} from "../components/event";
+
 import "../styles/event.scss";
 
 const sampleEvents: CalendarEvent[] = [
@@ -21,7 +25,7 @@ const sampleEvents: CalendarEvent[] = [
         startTime: new Date('2025-09-17T12:00:00').toISOString(),
         endTime: new Date('2025-09-17T13:00:00').toISOString(),
         color: '#d6680eff'
-        
+
     },
     {
         id: '3',
