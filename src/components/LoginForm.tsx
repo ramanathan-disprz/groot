@@ -1,11 +1,10 @@
-// src/components/LoginForm.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-import "../styles/AuthForm.scss";
 import { LoginRequest } from "../features/auth";
+import "../styles/AuthForm.scss";
 
 interface LoginFormProps {
     onSubmit: (formData: LoginRequest) => void;

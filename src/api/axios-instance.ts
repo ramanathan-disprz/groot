@@ -1,5 +1,5 @@
 import axios from "axios";
-import { URLConstants } from "../utils/URLConstants";
+import { URLConstants } from "../utils/constants";
 
 const axiosInstance = axios.create({
     baseURL: URLConstants.API_BASE_URL,

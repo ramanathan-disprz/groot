@@ -1,11 +1,12 @@
 import { ApiService } from "../../../api";
-import { URLConstants } from "../../../utils/URLConstants";
+import { URLConstants } from "../../../utils/constants";
 import {
     LoginRequest,
     LoginResponse,
     RegisterRequest,
     RegisterResponse
-} from "../"; // points to the auth folder
+} from "../";
+
 import { AuthCookie } from "../../../utils/AuthCookie";
 
 export const AuthService = {
@@ -20,7 +21,8 @@ export const AuthService = {
 
     logout: async (): Promise<void> => {
         AuthCookie.clearToken();
-        // queryClient.clear(); // wipe cached API data
+        // wipe cached API data
+        // queryClient.clear();
     }
 
 };
