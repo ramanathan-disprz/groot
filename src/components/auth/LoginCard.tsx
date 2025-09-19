@@ -68,7 +68,7 @@ const LoginCard: React.FC<LoginFormProps> = ({ onSubmit, onRegisterClick }) => {
                 </div>
 
                 <div className="login-card__links">
-                    <a href="#">Forgot password?</a>
+                    {/* <a href="#">Forgot password?</a> */}
                     <a onClick={onRegisterClick} href="#">Create Disprz Account</a>
                 </div>
             </form>

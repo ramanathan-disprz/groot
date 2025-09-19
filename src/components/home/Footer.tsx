@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
         <a href="#">Support</a>
       </div>
 
-      <div className={styles.copyright}>© {new Date().getFullYear()} MyCompany. All rights reserved.</div>
+      <div className={styles.copyright}>© {new Date().getFullYear()} Disprz. All rights reserved.</div>
     </footer>
   );
 };

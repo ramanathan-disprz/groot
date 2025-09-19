@@ -21,7 +21,6 @@ export const AuthService = {
 
     logout: async (): Promise<void> => {
         AuthCookie.clearToken();
-        // wipe cached API data
         // queryClient.clear();
     }
 

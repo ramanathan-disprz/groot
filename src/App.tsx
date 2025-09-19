@@ -7,6 +7,7 @@ import {
   Register,
   Event,
 } from './pages';
+
 import BaseRouteGuard from "./components/BaseRouteGuard";
 
 function App() {
