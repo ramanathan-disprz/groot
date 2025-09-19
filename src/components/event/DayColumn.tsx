@@ -33,14 +33,12 @@ const DayColumn: React.FC<Props> = ({ date, events = [], hourHeight = 120 }) => 
     const containerHeight = hourHeight * 24;
 
     const dayEvents = useMemo(() => {
-        console.log("Before Filtering:", events);
         return events.filter(e => {
             const s = e.startDateTime;
             return isSameDay(s, date);
         });
 
     }, [events, date]);
-    console.log("After Filtering:", dayEvents);
 
     const now = new Date();
     const showNow = isSameDay(now, date);
@@ -64,7 +62,6 @@ const DayColumn: React.FC<Props> = ({ date, events = [], hourHeight = 120 }) => 
                     const start = evt.startDateTime;
                     const end = evt.endDateTime;
                     const { top, height } = calculatePosition(start, end, hourHeight);
-                    console.log(`Event: ${evt.title}, Start: ${start}, Top: ${top}px, Height: ${height}px`);
                     return (
                         <div
                             key={evt.id}

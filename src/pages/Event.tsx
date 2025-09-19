@@ -7,48 +7,14 @@ import {
     SingleDayView,
     MultiDayView,
     ViewModeToggle,
-    BottomBar
+    BottomBar,
+    EventModal
 } from "../components/event";
 
 import "../styles/event.scss";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import EventService from "../features/events/services/event.service";
-import { URLConstants } from "../utils/constants";
-import { AuthCookie } from "../utils/AuthCookie";
-
-const sampleEvents: CalendarEvent[] = [
-    {
-        id: '1',
-        title: 'Morning Meeting',
-        startDateTime: new Date('2025-09-19T09:00:00+05:30'),
-        endDateTime: new Date('2025-09-18T12:00:00+05:30'),
-        color: '#d6680eff'
-    },
-    {
-        id: '2',
-        title: 'Lunch Break',
-        startDateTime: new Date('2025-09-18T15:01:00+05:30'),
-        endDateTime: new Date('2025-09-18T17:00:00+05:30'),
-        color: '#4ad60eff'
-
-    },
-    {
-        id: '3',
-        title: 'Project Discussion',
-        startDateTime: new Date('2025-09-18T15:01:00+05:30'),
-        endDateTime: new Date('2025-09-18T17:00:00+05:30'),
-        color: '#0ec2d6ff'
-    },
-    {
-        id: '4',
-        title: 'Evening Workout',
-        startDateTime: new Date('2025-09-18T19:00:00+05:30'),
-        endDateTime: new Date('2025-09-18T22:00:00+05:30'),
-        color: '#d60e93ff'
-
-    }
-];
 
 type Props = {}
 const Event: React.FC<Props> = ({ }) => {
@@ -56,6 +22,7 @@ const Event: React.FC<Props> = ({ }) => {
     const [centerDate, setCenterDate] = useState<Date>(new Date());
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [mode, setMode] = useState<ViewMode>('single');
+    const [modalOpen, setModalOpen] = useState(false);
 
     const prevWeek = () => setCenterDate(d => addDays(d, -7));
     const nextWeek = () => setCenterDate(d => addDays(d, 7));
@@ -118,9 +85,10 @@ const Event: React.FC<Props> = ({ }) => {
 
             <BottomBar
                 onToday={() => setSelectedDate(new Date())}
-                onAddEvent={() => alert("Add Event clicked")}
+                onAddEvent={() => setModalOpen(true)}
             />
 
+            <EventModal open={modalOpen} onClose={() => setModalOpen(false)} />
         </div>
     );
 };

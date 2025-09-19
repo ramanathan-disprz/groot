@@ -7,3 +7,4 @@ export { default as MultiDayView } from './MultiDayView';
 export { default as ViewModeToggle } from './ViewModeToggle';
 
 export {default as BottomBar} from './EventBottomBar';
+export {default as EventModal} from './EventModal';

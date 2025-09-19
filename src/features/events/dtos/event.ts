@@ -2,7 +2,8 @@ export interface EventRequest {
     userId?: number;
     title?: string;
     description?: string;
-    date?: string;
+    startDate?: string;
+    endDate?: string;
     startTime?: string;
     endTime?: string;
     timeZone?: string;
