@@ -12,15 +12,18 @@ function minutesFromStartOfDay(d: Date) {
     return d.getHours() * 60 + d.getMinutes();
 }
 
-function timeToString(iso: string) {
-    return new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+function timeToString(date: Date) {
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
 }
 
 function calculatePosition(start: Date, end: Date, hourHeight: number) {
     const hoursBeforeStart = start.getHours();
-    const top = hoursBeforeStart * (hourHeight) + (hoursBeforeStart * 0.9);
+    const startMinutes = start.getMinutes();
+    const top = hoursBeforeStart * (hourHeight) + (startMinutes / 60) * hourHeight +
+        (hoursBeforeStart * 0.9);
 
-    const durationInHours = Math.floor((end.getTime() - start.getTime()) / 3600000);
+    const durationInMs = end.getTime() - start.getTime();
+    const durationInHours = durationInMs / (1000 * 60 * 60);
     const hourLinesDuringEvent = Math.max(0, durationInHours - 1);
     const height = Math.max(0, durationInHours * hourHeight + (hourLinesDuringEvent * 0.9));
     return { top, height };
@@ -30,11 +33,14 @@ const DayColumn: React.FC<Props> = ({ date, events = [], hourHeight = 120 }) => 
     const containerHeight = hourHeight * 24;
 
     const dayEvents = useMemo(() => {
+        console.log("Before Filtering:", events);
         return events.filter(e => {
-            const s = new Date(e.startTime);
+            const s = e.startDateTime;
             return isSameDay(s, date);
         });
+
     }, [events, date]);
+    console.log("After Filtering:", dayEvents);
 
     const now = new Date();
     const showNow = isSameDay(now, date);
@@ -55,8 +61,8 @@ const DayColumn: React.FC<Props> = ({ date, events = [], hourHeight = 120 }) => 
                 ))}
 
                 {dayEvents.map(evt => {
-                    const start = new Date(evt.startTime);
-                    const end = new Date(evt.endTime);
+                    const start = evt.startDateTime;
+                    const end = evt.endDateTime;
                     const { top, height } = calculatePosition(start, end, hourHeight);
                     console.log(`Event: ${evt.title}, Start: ${start}, Top: ${top}px, Height: ${height}px`);
                     return (
@@ -65,17 +71,17 @@ const DayColumn: React.FC<Props> = ({ date, events = [], hourHeight = 120 }) => 
                             className="event-pill"
                             style={{ top: `${top}px`, height: `${Math.max(20, height)}px`, background: evt.color || undefined }}
                             role="button"
-                            aria-label={`${evt.title} ${timeToString(evt.startTime)} - ${timeToString(evt.endTime)}`}
+                            aria-label={`${evt.title} ${timeToString(evt.startDateTime)} - ${timeToString(evt.endDateTime)}`}
                         >
                             <div className="title">{evt.title}</div>
-                            <div className="time">{`${timeToString(evt.startTime)} - ${timeToString(evt.endTime)}`}</div>
+                            <div className="time">{`${timeToString(evt.startDateTime)} - ${timeToString(evt.endDateTime)}`}</div>
                         </div>
                     );
                 })}
 
                 {showNow && (
                     <div className="now-line" style={{ top: `${nowTop}px` }} aria-hidden="true">
-                        <div className="time-bubble">{`${timeToString(now.toISOString())}`}</div>
+                        <div className="time-bubble">{`${timeToString(now)}`}</div>
                     </div>
                 )}
             </div>

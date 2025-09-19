@@ -12,35 +12,39 @@ import {
 
 import "../styles/event.scss";
 import toast from "react-hot-toast";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import EventService from "../features/events/services/event.service";
+import { URLConstants } from "../utils/constants";
+import { AuthCookie } from "../utils/AuthCookie";
 
 const sampleEvents: CalendarEvent[] = [
     {
         id: '1',
         title: 'Morning Meeting',
-        startTime: new Date('2025-09-18T00:00:00').toISOString(),
-        endTime: new Date('2025-09-18T02:00:00').toISOString(),
+        startDateTime: new Date('2025-09-19T09:00:00+05:30'),
+        endDateTime: new Date('2025-09-18T12:00:00+05:30'),
         color: '#d6680eff'
     },
     {
         id: '2',
         title: 'Lunch Break',
-        startTime: new Date('2025-09-18T15:01:00').toISOString(),
-        endTime: new Date('2025-09-18T17:00:00').toISOString(),
+        startDateTime: new Date('2025-09-18T15:01:00+05:30'),
+        endDateTime: new Date('2025-09-18T17:00:00+05:30'),
         color: '#4ad60eff'
 
     },
     {
         id: '3',
         title: 'Project Discussion',
-        startTime: new Date('2025-09-18T21:00:00').toISOString(),
-        endTime: new Date('2025-09-18T24:00:00').toISOString(),
+        startDateTime: new Date('2025-09-18T15:01:00+05:30'),
+        endDateTime: new Date('2025-09-18T17:00:00+05:30'),
         color: '#0ec2d6ff'
     },
     {
         id: '4',
         title: 'Evening Workout',
-        startTime: new Date('2025-09-18T00:00:00').toISOString(),
-        endTime: new Date('2025-09-18T03:00:00').toISOString(),
+        startDateTime: new Date('2025-09-18T19:00:00+05:30'),
+        endDateTime: new Date('2025-09-18T22:00:00+05:30'),
         color: '#d60e93ff'
 
     }
@@ -49,18 +53,29 @@ const sampleEvents: CalendarEvent[] = [
 type Props = {}
 const Event: React.FC<Props> = ({ }) => {
 
-    useEffect(() => {
-        toast.success("Welcome")
-    });
-
     const [centerDate, setCenterDate] = useState<Date>(new Date());
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-    const [mode, setMode] = useState<ViewMode>('multi');
+    const [mode, setMode] = useState<ViewMode>('single');
 
     const prevWeek = () => setCenterDate(d => addDays(d, -7));
     const nextWeek = () => setCenterDate(d => addDays(d, 7));
 
     const monthName = selectedDate.toLocaleString('default', { month: 'long' });
+
+    function formatDate(date: Date): string {
+        return date.toLocaleDateString("en-CA"); // en-CA gives YYYY-MM-DD
+    }
+
+    const { data: events, error, isLoading } = useQuery<CalendarEvent[], Error>({
+        queryKey: ["events", formatDate(selectedDate)],
+        queryFn: () => EventService.getEvents(formatDate(selectedDate)),
+    });
+
+    useEffect(() => {
+        if (error) {
+            toast.error("Failed to load events");
+        }
+    }, [error]);
 
     return (
         <div className="calendar-shell">
@@ -84,9 +99,21 @@ const Event: React.FC<Props> = ({ }) => {
             </header>
 
             <main className="calendar-main">
-                {mode === 'single' && <SingleDayView startDate={selectedDate} events={sampleEvents} />}
-                {mode === 'multi' && <MultiDayView startDate={selectedDate} events={sampleEvents} />}
-                {mode === 'list' && <div className="list-view">List view not implemented yet</div>}
+                {isLoading && <div>Loading events...</div>}
+
+                {!isLoading && (
+                    <>
+                        {mode === "single" && (
+                            <SingleDayView startDate={selectedDate} events={events ?? []} />
+                        )}
+                        {mode === "multi" && (
+                            <MultiDayView startDate={selectedDate} events={events ?? []} />
+                        )}
+                        {mode === "list" && (
+                            <div className="list-view">List view not implemented yet</div>
+                        )}
+                    </>
+                )}
             </main>
 
             <BottomBar

@@ -2,7 +2,7 @@ export interface EventRequest {
     userId?: number;
     title?: string;
     description?: string;
-    eventDate?: string;
+    date?: string;
     startTime?: string;
     endTime?: string;
     timeZone?: string;
@@ -13,8 +13,7 @@ export interface EventResponse {
     userId?: number;
     title?: string;
     description?: string;
-    eventDate?: string;
-    startTime?: string;
-    endTime?: string;
+    startDateTime?: string;
+    endDateTime?: string;
     timeZone?: string;
 }

@@ -3,7 +3,7 @@ export type ViewMode = 'single' | 'multi' | 'list';
 export type CalendarEvent = {
     id: string;
     title: string;
-    startTime: string;
-    endTime: string;
+    startDateTime: Date;
+    endDateTime: Date;
     color?: string;
 }

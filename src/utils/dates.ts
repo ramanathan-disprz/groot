@@ -20,3 +20,7 @@ export function isSameDay(date1: Date, date2: Date) {
         date1.getMonth() === date2.getMonth() &&
         date1.getDate() === date2.getDate();
 }
+
+export function toDate(date: string | Date): Date {
+  return date instanceof Date ? date : new Date(date);
+}
