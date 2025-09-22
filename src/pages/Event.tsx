@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CalendarEvent, ViewMode } from '../models/event';
-import { addDays } from "../utils/dates";
+import { addDays, toDate } from "../utils/dates";
 
 import {
     WeekSlider,
@@ -15,9 +15,14 @@ import "../styles/event.scss";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import EventService from "../features/events/services/event.service";
+import { Header } from "../components/home";
+import { AuthService } from "../features/auth";
+import { useNavigate } from "react-router-dom";
 
 type Props = {}
 const Event: React.FC<Props> = ({ }) => {
+
+    const navigate = useNavigate();
 
     const [centerDate, setCenterDate] = useState<Date>(new Date());
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -44,52 +49,66 @@ const Event: React.FC<Props> = ({ }) => {
         }
     }, [error]);
 
+    const onLogout = async () => {
+        try {
+            await AuthService.logout();
+            navigate("/login");
+            toast.success("Logout successful");
+        } catch (err) {
+            toast.error("Logout failed");
+        }
+    };
+    
     return (
-        <div className="calendar-shell">
+        <>
+            <div className="calendar-shell">
+                <Header showLogout={true} onLogout={onLogout} />
 
-            <header className="calendar-top">
-                <div className="left">
-                    <h2>{monthName}</h2>
-                </div>
-                <div className="center">
-                    <WeekSlider
-                        centerDate={centerDate}
-                        selectedDate={selectedDate}
-                        onSelect={(d) => setSelectedDate(d)}
-                        onPrevWeek={prevWeek}
-                        onNextWeek={nextWeek}
-                    />
-                </div>
-                <div className="right">
-                    <ViewModeToggle mode={mode} onChange={(m) => setMode(m)} />
-                </div>
-            </header>
+                <header className="calendar-top">
+                    <div className="left">
+                        <h2>{monthName}</h2>
+                    </div>
+                    <div className="center">
+                        <WeekSlider
+                            centerDate={centerDate}
+                            selectedDate={selectedDate}
+                            onSelect={(d) => setSelectedDate(d)}
+                            onPrevWeek={prevWeek}
+                            onNextWeek={nextWeek}
+                        />
+                    </div>
+                    <div className="right">
+                        <ViewModeToggle mode={mode} onChange={(m) => setMode(m)} />
+                    </div>
+                </header>
 
-            <main className="calendar-main">
-                {isLoading && <div>Loading events...</div>}
+                <main className="calendar-main">
+                    {isLoading && <div>Loading events...</div>}
 
-                {!isLoading && (
-                    <>
-                        {mode === "single" && (
-                            <SingleDayView startDate={selectedDate} events={events ?? []} />
-                        )}
-                        {mode === "multi" && (
-                            <MultiDayView startDate={selectedDate} events={events ?? []} />
-                        )}
-                        {mode === "list" && (
-                            <div className="list-view">List view not implemented yet</div>
-                        )}
-                    </>
-                )}
-            </main>
+                    {!isLoading && (
+                        <>
+                            {mode === "single" && (
+                                <SingleDayView startDate={selectedDate} events={events ?? []} />
+                            )}
+                            {mode === "multi" && (
+                                <MultiDayView startDate={selectedDate} events={events ?? []} />
+                            )}
+                            {mode === "list" && (
+                                <div className="list-view">List view not implemented yet</div>
+                            )}
+                        </>
+                    )}
+                </main>
 
-            <BottomBar
-                onToday={() => setSelectedDate(new Date())}
-                onAddEvent={() => setModalOpen(true)}
-            />
+                <BottomBar
+                    onToday={() => setSelectedDate(new Date())}
+                    onAddEvent={() => setModalOpen(true)}
+                />
 
-            <EventModal open={modalOpen} onClose={() => setModalOpen(false)} />
-        </div>
+                <EventModal open={modalOpen} onClose={() => setModalOpen(false)} />
+            </div>
+        </>
+
     );
 };
 
