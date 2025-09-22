@@ -5,6 +5,7 @@ import { isSameDay } from "../../utils/dates";
 type Props = {
     date: Date;
     events: CalendarEvent[];
+    onEventClick: (event: CalendarEvent) => void;
     hourHeight?: number;
 }
 
@@ -29,7 +30,7 @@ function calculatePosition(start: Date, end: Date, hourHeight: number) {
     return { top, height };
 }
 
-const DayColumn: React.FC<Props> = ({ date, events = [], hourHeight = 120 }) => {
+const DayColumn: React.FC<Props> = ({ date, events = [], onEventClick, hourHeight = 120 }) => {
     const containerHeight = hourHeight * 24;
 
     const dayEvents = useMemo(() => {
@@ -65,6 +66,7 @@ const DayColumn: React.FC<Props> = ({ date, events = [], hourHeight = 120 }) => 
                     return (
                         <div
                             key={evt.id}
+                            onClick={() => onEventClick(evt)}
                             className="event-pill"
                             style={{ top: `${top}px`, height: `${Math.max(20, height)}px`, background: evt.color || undefined }}
                             role="button"

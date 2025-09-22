@@ -296,7 +296,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
   font-size: 1.1rem;
 
   .cancel {
@@ -309,19 +308,6 @@
   }
 
   .cancel:hover {
-    opacity: 0.8;
-  }
-
-  .add {
-    font-size: 1.35rem;
-    cursor: pointer;
-    color: $accent;
-    background: none;
-    border: none;
-    font-weight: 600;
-  }
-
-  .add:hover {
     opacity: 0.8;
   }
 }
@@ -351,7 +337,27 @@
     color: #fff;
     font-size: 1rem;
   }
+
+  .submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $accent;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .submit:hover {
+    opacity: 0.8;
+  }
+
 }
+
 
 /* Responsiveness */
 @media (max-width: 900px) {

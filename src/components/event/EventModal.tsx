@@ -43,8 +43,6 @@ const EventModal: React.FC<EventModalProps> = ({ open, onClose }) => {
         }
     })
 
-    
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -72,7 +70,6 @@ const EventModal: React.FC<EventModalProps> = ({ open, onClose }) => {
         console.log(formData)
         const eventRequest = toEventRequest();
         mutation.mutate(eventRequest);
-
     };
 
     return (
@@ -156,4 +153,5 @@ const EventModal: React.FC<EventModalProps> = ({ open, onClose }) => {
         </div>
     );
 };
+
 export default EventModal;

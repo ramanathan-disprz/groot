@@ -20,6 +20,15 @@ export const EventService = {
 
     addEvent: (payload: EventRequest) => {
         return ApiService.post<EventResponse, EventRequest>(`${URLConstants.EVENTS}`, payload);
+    },
+
+    updateEvent: (id: string, payload: EventRequest) => {
+        const eventId: number = Number.parseInt(id);
+        return ApiService.put<EventResponse, EventRequest>(`${URLConstants.EVENTS}/${eventId}`, payload);
+    },
+    deleteEvent: (id: string) => {
+        const eventId: number = Number.parseInt(id);
+        return ApiService.delete(`${URLConstants.EVENTS}/${eventId}`);
     }
 };
 

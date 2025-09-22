@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+
 import { CalendarEvent, ViewMode } from '../models/event';
-import { addDays, toDate } from "../utils/dates";
 
 import {
     WeekSlider,
@@ -8,29 +11,26 @@ import {
     MultiDayView,
     ViewModeToggle,
     BottomBar,
-    EventModal
+    AddEventModal,
+    UpdateEventModal
 } from "../components/event";
 
 import "../styles/event.scss";
-import toast from "react-hot-toast";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import EventService from "../features/events/services/event.service";
 import { Header } from "../components/home";
 import { AuthService } from "../features/auth";
-import { useNavigate } from "react-router-dom";
 
 type Props = {}
 const Event: React.FC<Props> = ({ }) => {
 
     const navigate = useNavigate();
 
-    const [centerDate, setCenterDate] = useState<Date>(new Date());
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [mode, setMode] = useState<ViewMode>('single');
-    const [modalOpen, setModalOpen] = useState(false);
+    const [addEventModalOpen, setAddEventModalOpen] = useState(false);
+    const [updateEventModalOpen, setUpdateEventModalOpen] = useState(false);
 
-    const prevWeek = () => setCenterDate(d => addDays(d, -7));
-    const nextWeek = () => setCenterDate(d => addDays(d, 7));
+    const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
 
     const monthName = selectedDate.toLocaleString('default', { month: 'long' });
 
@@ -58,7 +58,12 @@ const Event: React.FC<Props> = ({ }) => {
             toast.error("Logout failed");
         }
     };
-    
+
+    const handleEventClick = (event: CalendarEvent) => {
+        setSelectedEvent(event);
+        setUpdateEventModalOpen(true);
+    };
+
     return (
         <>
             <div className="calendar-shell">
@@ -70,11 +75,9 @@ const Event: React.FC<Props> = ({ }) => {
                     </div>
                     <div className="center">
                         <WeekSlider
-                            centerDate={centerDate}
                             selectedDate={selectedDate}
                             onSelect={(d) => setSelectedDate(d)}
-                            onPrevWeek={prevWeek}
-                            onNextWeek={nextWeek}
+                            onChangeWeek={setSelectedDate}
                         />
                     </div>
                     <div className="right">
@@ -88,10 +91,16 @@ const Event: React.FC<Props> = ({ }) => {
                     {!isLoading && (
                         <>
                             {mode === "single" && (
-                                <SingleDayView startDate={selectedDate} events={events ?? []} />
+                                <SingleDayView
+                                    startDate={selectedDate}
+                                    events={events ?? []}
+                                    onEventClick={handleEventClick} />
                             )}
                             {mode === "multi" && (
-                                <MultiDayView startDate={selectedDate} events={events ?? []} />
+                                <MultiDayView
+                                    startDate={selectedDate}
+                                    events={events ?? []}
+                                    onEventClick={handleEventClick} />
                             )}
                             {mode === "list" && (
                                 <div className="list-view">List view not implemented yet</div>
@@ -102,13 +111,13 @@ const Event: React.FC<Props> = ({ }) => {
 
                 <BottomBar
                     onToday={() => setSelectedDate(new Date())}
-                    onAddEvent={() => setModalOpen(true)}
+                    onAddEvent={() => setAddEventModalOpen(true)}
                 />
 
-                <EventModal open={modalOpen} onClose={() => setModalOpen(false)} />
+                <AddEventModal open={addEventModalOpen} onClose={() => setAddEventModalOpen(false)} />
+                <UpdateEventModal open={updateEventModalOpen} onClose={() => setUpdateEventModalOpen(false)} currentEvent={selectedEvent} />
             </div>
         </>
-
     );
 };
 
