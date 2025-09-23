@@ -85,6 +85,8 @@ const DayColumn: React.FC<Props> = ({ date, events = [], onEventClick, hourHeigh
                                     display: "inline-flex",
                                     alignItems: "center",
                                     gap: "0.4rem",
+                                    fontWeight: 600,
+                                    fontSize: "1rem",
                                 }}
                             >
                                 <FontAwesomeIcon icon={eventTypeMeta.icon} />

@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  padding: 0 1rem;
 }
 
 .calendar-top {
@@ -183,10 +184,16 @@
       font-size: 13px;
       cursor: pointer;
 
+      .title{
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+
       .time {
         opacity: 0.8;
-        font-size: 12px;
+        font-size: 1rem;
         margin-left: 8px;
+        font-weight: 700;
       }
     }
 
