@@ -21,11 +21,15 @@ import { Header } from "../components/home";
 import { AuthService } from "../features/auth";
 import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 import ListView from "../components/event/ListView";
+import { addDays } from "../utils/dates";
+import { useQueryClient } from "@tanstack/react-query";
 
 type Props = {}
+
 const Event: React.FC<Props> = ({ }) => {
 
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [mode, setMode] = useState<ViewMode>('single');
@@ -46,16 +50,60 @@ const Event: React.FC<Props> = ({ }) => {
         return date.toLocaleDateString("en-CA"); // en-CA gives YYYY-MM-DD
     }
 
-    const { data: events, error, isLoading } = useQuery<CalendarEvent[], Error>({
-        queryKey: ["events", formatDate(selectedDate)],
-        queryFn: () => EventService.getEvents(formatDate(selectedDate)),
+    const getDayWindow = (selectedDate: Date, mode: ViewMode): { start: Date, end: Date } => {
+        if (mode == "multi") {
+            const start = selectedDate;
+            const end = addDays(start, 1);
+            return { start, end };
+        }
+        return { start: selectedDate, end: selectedDate };
+    }
+
+    const { start, end } = getDayWindow(selectedDate, mode);
+
+    const fetchEvent = useQuery<CalendarEvent[], Error>({
+        queryKey: ["events", formatDate(start), formatDate(end)],
+        queryFn: () => EventService.getEventsOnRange(formatDate(start), formatDate(end)),
+        staleTime: 1000 * 60 * 5,
     });
 
     useEffect(() => {
-        if (error) {
+        if (fetchEvent.error) {
             toast.error("Failed to load events");
         }
-    }, [error]);
+    }, [fetchEvent.error]);
+
+
+    useEffect(() => {
+        if (mode !== "multi") return; // only prefetch in multi-day view
+
+        // Prefetch next 2-day window
+        const nextStart = addDays(end, 1);
+        const nextEnd = addDays(end, 2);
+
+        // Prefetch previous 2-day window
+        const prevStart = addDays(start, -2);
+        const prevEnd = addDays(start, -1);
+
+        // Prefetch next window only if not cached
+        if (!queryClient.getQueryData(["events", formatDate(nextStart), formatDate(nextEnd)])) {
+            queryClient.prefetchQuery({
+                queryKey: ["events", formatDate(nextStart), formatDate(nextEnd)],
+                queryFn: () => EventService.getEventsOnRange(formatDate(nextStart), formatDate(nextEnd)),
+                staleTime: 1000 * 60 * 5,
+            });
+        }
+
+        // Prefetch previous window only if not cached
+        if (!queryClient.getQueryData(["events", formatDate(prevStart), formatDate(prevEnd)])) {
+            queryClient.prefetchQuery({
+                queryKey: ["events", formatDate(prevStart), formatDate(prevEnd)],
+                queryFn: () => EventService.getEventsOnRange(formatDate(prevStart), formatDate(prevEnd)),
+                staleTime: 1000 * 60 * 5,
+            });
+        }
+
+    }, [start, end, mode, queryClient]);
 
     const onLogout = async () => {
         try {
@@ -94,24 +142,24 @@ const Event: React.FC<Props> = ({ }) => {
                 </header>
 
                 <main className="calendar-main">
-                    {isLoading && <div>Loading events...</div>}
+                    {fetchEvent.isLoading && <div>Loading events...</div>}
 
-                    {!isLoading && (
+                    {!fetchEvent.isLoading && (
                         <>
                             {mode === "single" && (
                                 <SingleDayView
                                     startDate={selectedDate}
-                                    events={events ?? []}
+                                    events={fetchEvent.data ?? []}
                                     onEventClick={handleEventClick} />
                             )}
                             {mode === "multi" && (
                                 <MultiDayView
                                     startDate={selectedDate}
-                                    events={events ?? []}
+                                    events={fetchEvent.data ?? []}
                                     onEventClick={handleEventClick} />
                             )}
                             {mode === "list" && (
-                                <ListView events={events ?? []} />
+                                <ListView events={fetchEvent.data ?? []} />
                             )}
                         </>
                     )}

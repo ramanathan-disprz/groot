@@ -23,7 +23,10 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ open = false, onClose }) 
         },
         onSuccess: (data: EventResponse) => {
             toast.success("Event added successfully");
-            queryClient.invalidateQueries({ queryKey: ["events"] });
+            queryClient.invalidateQueries({
+                queryKey: ["events"],
+                exact: false
+            });
             onClose();
         }
     });

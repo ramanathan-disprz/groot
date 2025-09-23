@@ -15,5 +15,4 @@ const SingleDayView: React.FC<Props> = ({ startDate, events, onEventClick }) => 
     )
 }
 
-
 export default SingleDayView

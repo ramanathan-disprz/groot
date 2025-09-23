@@ -25,7 +25,10 @@ const UpdateEventModal: React.FC<UpdateEventModalProps> = ({ open = false, onClo
         },
         onSuccess: (data: EventResponse) => {
             toast.success("Event updated successfully");
-            queryClient.invalidateQueries({ queryKey: ["events"] });
+            queryClient.invalidateQueries({
+                queryKey: ["events"],
+                exact: false
+            });
             onClose();
         }
     });
@@ -38,7 +41,10 @@ const UpdateEventModal: React.FC<UpdateEventModalProps> = ({ open = false, onClo
         },
         onSuccess: () => {
             toast.success("Event deleted successfully");
-            queryClient.invalidateQueries({ queryKey: ["events"] });
+            queryClient.invalidateQueries({
+                queryKey: ["events"],
+                exact: false
+            });
             onClose();
         }
     });
