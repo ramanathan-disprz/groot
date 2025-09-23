@@ -20,6 +20,7 @@ import EventService from "../features/events/services/event.service";
 import { Header } from "../components/home";
 import { AuthService } from "../features/auth";
 import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
+import ListView from "../components/event/ListView";
 
 type Props = {}
 const Event: React.FC<Props> = ({ }) => {
@@ -110,7 +111,7 @@ const Event: React.FC<Props> = ({ }) => {
                                     onEventClick={handleEventClick} />
                             )}
                             {mode === "list" && (
-                                <div className="list-view">List view not implemented yet</div>
+                                <ListView events={events ?? []} />
                             )}
                         </>
                     )}

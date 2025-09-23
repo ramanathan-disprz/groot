@@ -12,6 +12,7 @@ export const EventService = {
         return events.map(event => ({
             id: String(event.id ?? ""),
             title: event.title ?? "",
+            description: event.description ?? "",
             startDateTime: toDate(event.startDateTime ?? ""),
             endDateTime: toDate(event.endDateTime ?? ""),
             eventType: event.eventType ?? "Work",
