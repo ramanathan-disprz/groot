@@ -3,6 +3,8 @@ import toast from "react-hot-toast";
 import { EventRequest } from "../../features/events/dtos/event";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import ToggleEventGroup from "./EventTypeToggle";
+import { EVENT_TYPE_META, EventType } from "../../utils/constants";
 
 interface AddEventFormProps {
     onSubmit: (formData: EventRequest) => void;
@@ -17,6 +19,7 @@ const AddEventForm: React.FC<AddEventFormProps> = ({ onSubmit, onClose }) => {
         description: '',
         startDateTime: '',
         endDateTime: '',
+        type: ''
     });
 
     const handleChange = (
@@ -36,6 +39,7 @@ const AddEventForm: React.FC<AddEventFormProps> = ({ onSubmit, onClose }) => {
             endDate: end.split("T")[0],
             startTime: start.split("T")[1].slice(0, 5),
             endTime: end.split("T")[1].slice(0, 5),
+            eventType: formData.type
         };
     }
 
@@ -54,7 +58,7 @@ const AddEventForm: React.FC<AddEventFormProps> = ({ onSubmit, onClose }) => {
         <div>
             <header className="event-modal__header">
                 <button className="cancel" onClick={onClose}>
-                   <FontAwesomeIcon icon={faXmark} />
+                    <FontAwesomeIcon icon={faXmark} />
                 </button>
                 <h2 className="">New Event</h2>
             </header>
@@ -69,6 +73,13 @@ const AddEventForm: React.FC<AddEventFormProps> = ({ onSubmit, onClose }) => {
                     value={formData.title || ""}
                     aria-label="Title"
                     onChange={handleChange}
+                />
+            </div>
+
+            <div className="form-row">
+                <ToggleEventGroup
+                    type={formData.type as EventType || "Other"}  
+                    onChange={(val) => handleChange({ target: { name: "type", value: val } } as any)}
                 />
             </div>
 

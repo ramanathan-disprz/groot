@@ -6,5 +6,5 @@ export type CalendarEvent = {
     description?: string;
     startDateTime: Date;
     endDateTime: Date;
-    color?: string;
+    eventType?: string;
 }

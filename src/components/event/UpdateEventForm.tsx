@@ -5,6 +5,8 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { EventRequest } from "../../features/events/dtos/event";
 import { CalendarEvent } from "../../models";
+import EventTypeToggle from "./EventTypeToggle";
+import { EventType } from "../../utils/constants";
 
 interface UpdateEventFormProps {
     onSubmit: (formData: EventRequest) => void;
@@ -13,13 +15,14 @@ interface UpdateEventFormProps {
     currentEvent: CalendarEvent | null;
 }
 
-const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, currentEvent, onDelete}) => {
+const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, currentEvent, onDelete }) => {
     const [formData, setFormData] = useState({
         id: '',
         title: '',
         description: '',
         startDateTime: '',
         endDateTime: '',
+        type: ''
     });
 
     function formatDate(dateString: any): string {
@@ -46,6 +49,7 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, cu
                 description: currentEvent.description ?? "",
                 startDateTime: formatDate(currentEvent.startDateTime),
                 endDateTime: formatDate(currentEvent.endDateTime),
+                type: currentEvent.eventType ?? "Other"
             });
         }
     }, [currentEvent])
@@ -67,6 +71,7 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, cu
             endDate: end.split("T")[0],
             startTime: start.split("T")[1].slice(0, 5),
             endTime: end.split("T")[1].slice(0, 5),
+            eventType: formData.type
         };
     }
 
@@ -113,6 +118,14 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, cu
             </div>
 
             <div className="form-row">
+                <EventTypeToggle
+                    type={formData.type as EventType || "Other"}
+                    onChange={(val) => handleChange({ target: { name: "type", value: val } } as any)}
+                />
+            </div>
+
+
+            <div className="form-row">
                 <label htmlFor="startDateTime">Starts</label>
                 <input
                     type="datetime-local"
@@ -155,7 +168,7 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, cu
                     className="submit"
                     onClick={handleSubmit}
                 >
-                    Add
+                    Update
                 </button>
             </div>
         </div>

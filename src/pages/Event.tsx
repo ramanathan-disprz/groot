@@ -19,6 +19,7 @@ import "../styles/event.scss";
 import EventService from "../features/events/services/event.service";
 import { Header } from "../components/home";
 import { AuthService } from "../features/auth";
+import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 
 type Props = {}
 const Event: React.FC<Props> = ({ }) => {
@@ -31,6 +32,12 @@ const Event: React.FC<Props> = ({ }) => {
     const [updateEventModalOpen, setUpdateEventModalOpen] = useState(false);
 
     const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
+
+    useKeyboardShortcuts({
+        s: () => setMode("single"),
+        m: () => setMode("multi"),
+        l: () => setMode("list")
+    });
 
     const monthName = selectedDate.toLocaleString('default', { month: 'long' });
 

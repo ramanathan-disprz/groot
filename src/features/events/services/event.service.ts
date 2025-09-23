@@ -1,6 +1,6 @@
 import { ApiService } from "../../../api";
 import { CalendarEvent } from "../../../models";
-import { URLConstants } from "../../../utils/constants";
+import { EVENT_TYPE_META, URLConstants } from "../../../utils/constants";
 import { toDate } from "../../../utils/dates";
 
 import { EventRequest, EventResponse } from "../dtos/event";
@@ -14,7 +14,7 @@ export const EventService = {
             title: event.title ?? "",
             startDateTime: toDate(event.startDateTime ?? ""),
             endDateTime: toDate(event.endDateTime ?? ""),
-            color: "#09430eff",
+            eventType: event.eventType ?? "Work",
         }));
     },
 

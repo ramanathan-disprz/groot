@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-import { LoginRequest, RegisterRequest } from "../../features/auth";
+import {RegisterRequest } from "../../features/auth";
 
 import Logo from "./Logo";
 

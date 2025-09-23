@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { CalendarEvent } from "../../models";
 import { isSameDay } from "../../utils/dates";
+import { EVENT_TYPE_META, EventType, EventTypeMeta } from "../../utils/constants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type Props = {
     date: Date;
@@ -28,6 +30,11 @@ function calculatePosition(start: Date, end: Date, hourHeight: number) {
     const hourLinesDuringEvent = Math.max(0, durationInHours - 1);
     const height = Math.max(0, durationInHours * hourHeight + (hourLinesDuringEvent * 0.9));
     return { top, height };
+}
+
+export function getEventTypeMeta(type?: string): EventTypeMeta {
+    const key = type as EventType;
+    return EVENT_TYPE_META[key] ?? EVENT_TYPE_META.Other;
 }
 
 const DayColumn: React.FC<Props> = ({ date, events = [], onEventClick, hourHeight = 120 }) => {
@@ -63,15 +70,26 @@ const DayColumn: React.FC<Props> = ({ date, events = [], onEventClick, hourHeigh
                     const start = evt.startDateTime;
                     const end = evt.endDateTime;
                     const { top, height } = calculatePosition(start, end, hourHeight);
+                    const eventTypeMeta = getEventTypeMeta(evt.eventType);
                     return (
                         <div
                             key={evt.id}
                             onClick={() => onEventClick(evt)}
                             className="event-pill"
-                            style={{ top: `${top}px`, height: `${Math.max(20, height)}px`, background: evt.color || undefined }}
+                            style={{ top: `${top}px`, height: `${Math.max(20, height)}px`, background: eventTypeMeta.color || undefined }}
                             role="button"
                             aria-label={`${evt.title} ${timeToString(evt.startDateTime)} - ${timeToString(evt.endDateTime)}`}
                         >
+                            <span
+                                style={{
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    gap: "0.4rem",
+                                }}
+                            >
+                                <FontAwesomeIcon icon={eventTypeMeta.icon} />
+                                {eventTypeMeta.label}
+                            </span>
                             <div className="title">{evt.title}</div>
                             <div className="time">{`${timeToString(evt.startDateTime)} - ${timeToString(evt.endDateTime)}`}</div>
                         </div>

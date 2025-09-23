@@ -7,6 +7,7 @@ export interface EventRequest {
     startTime?: string;
     endTime?: string;
     timeZone?: string;
+    eventType?: string;
 }
 
 export interface EventResponse {
@@ -17,4 +18,5 @@ export interface EventResponse {
     startDateTime?: string; // "2024-01-01T00:00:00"
     endDateTime?: string; // "2024-01-01T00:00:00"
     timeZone?: string;
+    eventType?: string;
 }
