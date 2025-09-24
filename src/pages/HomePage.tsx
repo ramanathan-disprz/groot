@@ -4,7 +4,7 @@ import {
   Footer
 } from '../components/home';
 
-const HomeScreen: React.FC = () => {
+const HomePage: React.FC = () => {
   return (
     <div>
       <Header />
@@ -16,4 +16,4 @@ const HomeScreen: React.FC = () => {
   );
 };
 
-export default HomeScreen;
+export default HomePage;

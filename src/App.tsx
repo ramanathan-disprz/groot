@@ -2,10 +2,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import { Toaster } from "react-hot-toast";
 import './App.css';
 import {
-  Home,
-  Login,
-  Register,
-  Event,
+  HomePage,
+  LoginPage,
+  RegisterPage,
+  EventPage,
 } from './pages';
 
 import BaseRouteGuard from "./components/BaseRouteGuard";
@@ -15,11 +15,11 @@ function App() {
     <Router basename="ui">
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/events" element={<BaseRouteGuard> <Event /> </BaseRouteGuard>} />
-        <Route path="/test" element={<BaseRouteGuard> <Register /> </BaseRouteGuard>} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/events" element={<BaseRouteGuard> <EventPage /> </BaseRouteGuard>} />
+        <Route path="/test" element={<BaseRouteGuard> <RegisterPage /> </BaseRouteGuard>} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
 

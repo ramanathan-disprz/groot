@@ -1,5 +1,5 @@
 import { ApiService } from "../../../api";
-import { CalendarEvent } from "../../../models";
+import { CalendarEvent } from "../dtos";
 import { URLConstants } from "../../../utils/constants";
 import { toDate } from "../../../utils/dates";
 

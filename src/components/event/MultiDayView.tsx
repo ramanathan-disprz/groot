@@ -1,7 +1,7 @@
 import React from 'react';
 import DayColumn from './DayColumn';
-import { CalendarEvent } from '../../models';
 import { addDays } from '../../utils/dates';
+import { CalendarEvent } from '../../features/events';
 
 type Props = {
     startDate: Date;

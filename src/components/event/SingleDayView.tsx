@@ -1,5 +1,5 @@
+import { CalendarEvent } from "../../features/events";
 import DayColumn from "./DayColumn";
-import { CalendarEvent } from "../../models";
 
 type Props = {
     startDate: Date;

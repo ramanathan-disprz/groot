@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-import { Modal } from "../utils";
+import { Modal } from "../common";
 import EventService from "../../features/events/services/event.service";
-import { APIErrorResponse } from "../../features/auth";
+import { APIErrorResponse } from "../../api";
 import { EventRequest, EventResponse } from "../../features/events/dtos/event";
 import AddEventForm from "./AddEventForm";
 
@@ -19,7 +19,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ open = false, onClose }) 
         mutationFn: EventService.addEvent,
         onError: (error: any) => {
             const apiError: APIErrorResponse = error.response?.data;
-            toast.error(apiError.Message || "Failed to add event");
+            toast.error(apiError.message || "Failed to add event");
         },
         onSuccess: (data: EventResponse) => {
             toast.success("Event added successfully");

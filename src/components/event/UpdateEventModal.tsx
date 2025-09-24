@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { EventRequest, EventResponse } from "../../features/events/dtos/event";
-import { CalendarEvent } from "../../models";
-import { Modal } from "../utils";
+import { Modal } from "../common";
 import UpdateEventForm from "./UpdateEventForm";
 import EventService from "../../features/events/services/event.service";
 import toast from "react-hot-toast";
-import { APIErrorResponse } from "../../features/auth";
+import { CalendarEvent } from "../../features/events";
+import { APIErrorResponse } from "../../api";
 
 interface UpdateEventModalProps {
     open: boolean;
@@ -21,7 +21,7 @@ const UpdateEventModal: React.FC<UpdateEventModalProps> = ({ open = false, onClo
             EventService.updateEvent(id, payload),
         onError: (error: any) => {
             const apiError: APIErrorResponse = error.response?.data;
-            toast.error(apiError.Message || "Failed to update event");
+            toast.error(apiError.message || "Failed to update event");
         },
         onSuccess: (data: EventResponse) => {
             toast.success("Event updated successfully");
@@ -37,7 +37,7 @@ const UpdateEventModal: React.FC<UpdateEventModalProps> = ({ open = false, onClo
         mutationFn: (id: string) => EventService.deleteEvent(id),
         onError: (error: any) => {
             const apiError: APIErrorResponse = error.response?.data;
-            toast.error(apiError.Message || "Failed to delete event");
+            toast.error(apiError.message || "Failed to delete event");
         },
         onSuccess: () => {
             toast.success("Event deleted successfully");

@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import {
     AuthService,
     LoginRequest,
-    APIErrorResponse,
     LoginResponse
 } from "../../features/auth";
 
@@ -14,8 +13,9 @@ import { Footer, Header } from "../../components/home";
 import LoginCard from "../../components/auth/LoginCard";
 
 import "./Login.scss";
+import { APIErrorResponse } from "../../api";
 
-const Login: React.FC = () => {
+const LoginPage: React.FC = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const redirectTo = searchParams.get("redirectTo") || "/events";
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
         mutationFn: AuthService.login,
         onError: (error: any) => {
             const apiError: APIErrorResponse = error.response?.data;
-            toast.error(apiError.Message || "Login Failed");
+            toast.error(apiError.message || "Login Failed");
         },
         onSuccess: (data: LoginResponse) => {
             AuthCookie.setToken(data)
@@ -53,4 +53,4 @@ const Login: React.FC = () => {
         </>
     );
 };
-export default Login;
+export default LoginPage;

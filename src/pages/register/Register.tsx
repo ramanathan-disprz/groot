@@ -5,14 +5,13 @@ import toast from "react-hot-toast";
 import {
     AuthService,
     RegisterRequest,
-    APIErrorResponse,
-    RegisterResponse
 } from "../../features/auth";
 import {
     Footer,
     Header
 } from "../../components/home";
 import RegisterCard from "../../components/auth/RegisterCard";
+import { APIErrorResponse } from "../../api";
 
 
 const Register: React.FC = () => {
@@ -22,7 +21,7 @@ const Register: React.FC = () => {
         mutationFn: AuthService.register,
         onError: (error: any) => {
             const apiError: APIErrorResponse = error.response?.data;
-            toast.error(apiError.Message || "Registration Failed");
+            toast.error(apiError.message || "Registration Failed");
         },
         onSuccess(data) {
             toast.success("Registration successful! Please login.");

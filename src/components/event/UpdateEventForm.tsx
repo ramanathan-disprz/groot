@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { EventRequest } from "../../features/events/dtos/event";
-import { CalendarEvent } from "../../models";
 import EventTypeToggle from "./EventTypeToggle";
 import { EventType } from "../../utils/constants";
+import { CalendarEvent } from "../../features/events";
 
 interface UpdateEventFormProps {
     onSubmit: (formData: EventRequest) => void;

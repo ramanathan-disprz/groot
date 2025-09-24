@@ -3,8 +3,6 @@ import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
-import { CalendarEvent, ViewMode } from '../models/event';
-
 import {
     WeekSlider,
     SingleDayView,
@@ -23,10 +21,11 @@ import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 import ListView from "../components/event/ListView";
 import { addDays } from "../utils/dates";
 import { useQueryClient } from "@tanstack/react-query";
+import { CalendarEvent, ViewMode } from "../features/events/dtos/event.view";
 
 type Props = {}
 
-const Event: React.FC<Props> = ({ }) => {
+const EventPage: React.FC<Props> = ({ }) => {
 
     const navigate = useNavigate();
     const queryClient = useQueryClient();
@@ -177,4 +176,4 @@ const Event: React.FC<Props> = ({ }) => {
     );
 };
 
-export default Event;
+export default EventPage;

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { CalendarEvent } from "../../models";
+import { CalendarEvent } from "../../features/events";
 import { EVENT_TYPE_META, EventType, EventTypeMeta } from "../../utils/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
