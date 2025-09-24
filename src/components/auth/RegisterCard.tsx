@@ -1,7 +1,7 @@
-import { useState } from "react";
+import {useState} from "react";
 import toast from "react-hot-toast";
 
-import {RegisterRequest } from "../../features/auth";
+import {RegisterRequest} from "../../features/auth";
 
 import Logo from "./Logo";
 
@@ -12,12 +12,12 @@ interface LoginFormProps {
     onLoginClick?: () => void;
 }
 
-const RegisterCard: React.FC<LoginFormProps> = ({ onSubmit, onLoginClick }) => {
-    const [formData, setFormData] = useState<RegisterRequest>({ name: "", email: "", password: "", confirmPassword: "" });
+const RegisterCard: React.FC<LoginFormProps> = ({onSubmit, onLoginClick}) => {
+    const [formData, setFormData] = useState<RegisterRequest>({name: "", email: "", password: "", confirmPassword: ""});
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setFormData(prev => ({...prev, [name]: value}));
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -50,7 +50,7 @@ const RegisterCard: React.FC<LoginFormProps> = ({ onSubmit, onLoginClick }) => {
 
     return (
         <section className="login-card">
-            <Logo />
+            <Logo/>
             <h2 className="login-card__title">Create an Account with Disprz</h2>
             <form className="login-card__form" onSubmit={handleSubmit}>
 
@@ -106,8 +106,8 @@ const RegisterCard: React.FC<LoginFormProps> = ({ onSubmit, onLoginClick }) => {
                 </div>
 
                 <div className="login-card__links">
-                   Do you already have an account?
-                   <a onClick={handleLoginClick} href="#">Sign In with Disprz Account</a>
+                    Do you already have an account?
+                    <a onClick={handleLoginClick} href="#">Sign In with Disprz Account</a>
                 </div>
             </form>
         </section>

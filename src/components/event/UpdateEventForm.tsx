@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { EventRequest } from "../../features/events/dtos/event";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faTrashCan} from "@fortawesome/free-regular-svg-icons";
+import {EventRequest} from "../../features/events/dtos/event";
 import EventTypeToggle from "./EventTypeToggle";
-import { EventType } from "../../utils/constants";
-import { CalendarEvent } from "../../features/events";
+import {EventType} from "../../utils/constants";
+import {CalendarEvent} from "../../features/events";
 
 interface UpdateEventFormProps {
     onSubmit: (formData: EventRequest) => void;
@@ -15,7 +15,7 @@ interface UpdateEventFormProps {
     currentEvent: CalendarEvent | null;
 }
 
-const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, currentEvent, onDelete }) => {
+const UpdateEventForm: React.FC<UpdateEventFormProps> = ({onSubmit, onClose, currentEvent, onDelete}) => {
     const [formData, setFormData] = useState({
         id: '',
         title: '',
@@ -57,8 +57,8 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, cu
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setFormData((prev) => ({...prev, [name]: value}));
     };
 
     const toEventRequest = (): EventRequest => {
@@ -95,12 +95,12 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, cu
             <header className="event-modal__header">
 
                 <button className="cancel" onClick={onClose}>
-                    <FontAwesomeIcon icon={faXmark} />
+                    <FontAwesomeIcon icon={faXmark}/>
                 </button>
                 <h2 className="">Update Event</h2>
 
                 <button className="cancel" onClick={handleDelete}>
-                    <FontAwesomeIcon icon={faTrashCan} />
+                    <FontAwesomeIcon icon={faTrashCan}/>
                 </button>
             </header>
 
@@ -120,7 +120,7 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, cu
             <div className="form-row">
                 <EventTypeToggle
                     type={formData.type as EventType || "Other"}
-                    onChange={(val) => handleChange({ target: { name: "type", value: val } } as any)}
+                    onChange={(val) => handleChange({target: {name: "type", value: val}} as any)}
                 />
             </div>
 

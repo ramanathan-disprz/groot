@@ -1,16 +1,16 @@
-import { useState } from "react";
+import {useState} from "react";
 import toast from "react-hot-toast";
-import { EventRequest, EventResponse } from "../../features/events/dtos/event";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {EventRequest, EventResponse} from "../../features/events/dtos/event";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import EventService from "../../features/events/services/event.service";
-import { APIErrorResponse } from "../../api";
+import {APIErrorResponse} from "../../api";
 
 interface EventModalProps {
     open: boolean;
     onClose: () => void;
 }
 
-const EventModal: React.FC<EventModalProps> = ({ open, onClose }) => {
+const EventModal: React.FC<EventModalProps> = ({open, onClose}) => {
     const [formData, setFormData] = useState({
         id: '',
         title: '',
@@ -28,7 +28,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, onClose }) => {
         },
         onSuccess: (data: EventResponse) => {
             toast.success("Event added successfully");
-            queryClient.invalidateQueries({ queryKey: ["events"] });
+            queryClient.invalidateQueries({queryKey: ["events"]});
             setFormData({
                 id: '',
                 title: '',
@@ -41,8 +41,8 @@ const EventModal: React.FC<EventModalProps> = ({ open, onClose }) => {
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setFormData(prev => ({...prev, [name]: value}));
     };
 
     const toEventRequest = (): EventRequest => {

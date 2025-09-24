@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-import { Modal } from "../common";
+import {Modal} from "../common";
 import EventService from "../../features/events/services/event.service";
-import { APIErrorResponse } from "../../api";
-import { EventRequest, EventResponse } from "../../features/events/dtos/event";
+import {APIErrorResponse} from "../../api";
+import {EventRequest, EventResponse} from "../../features/events/dtos/event";
 import AddEventForm from "./AddEventForm";
 
 interface AddEventModalProps {
@@ -12,7 +12,7 @@ interface AddEventModalProps {
     onClose: () => void;
 }
 
-const AddEventModal: React.FC<AddEventModalProps> = ({ open = false, onClose }) => {
+const AddEventModal: React.FC<AddEventModalProps> = ({open = false, onClose}) => {
 
     const queryClient = useQueryClient();
     const mutation = useMutation({
@@ -38,7 +38,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ open = false, onClose }) 
 
     return (
         <Modal open={open} onClose={onClose}>
-            <AddEventForm onSubmit={handleSubmit} onClose={onClose} />
+            <AddEventForm onSubmit={handleSubmit} onClose={onClose}/>
         </Modal>
     );
 };

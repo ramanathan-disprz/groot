@@ -1,13 +1,13 @@
-import { useMemo, useState } from "react";
-import { CalendarEvent } from "../../features/events";
-import { EVENT_TYPE_META, EventType, EventTypeMeta } from "../../utils/constants";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useMemo, useState} from "react";
+import {CalendarEvent} from "../../features/events";
+import {EVENT_TYPE_META, EventType, EventTypeMeta} from "../../utils/constants";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface EventListProps {
     events: CalendarEvent[];
 }
 
-const ListView: React.FC<EventListProps> = ({ events }) => {
+const ListView: React.FC<EventListProps> = ({events}) => {
 
     const [searchParam, setSearchParam] = useState("");
     const filteredEvents = useMemo(() => {
@@ -35,11 +35,11 @@ const ListView: React.FC<EventListProps> = ({ events }) => {
         | "Completed"
         | "Ongoing"
         | "Upcoming";
-    
+
     const TimeStatusColor: Record<TimeStatus, string> = {
-        Completed: "#A0AEC0", 
-        Ongoing: "#38A169",  
-        Upcoming: "#3182CE", 
+        Completed: "#A0AEC0",
+        Ongoing: "#38A169",
+        Upcoming: "#3182CE",
     };
 
     function getTimeStatus(startDateTime: Date, endDateTime: Date): TimeStatus {
@@ -91,16 +91,16 @@ const ListView: React.FC<EventListProps> = ({ events }) => {
                                     key={event.id}
                                     className="event-card"
                                     onClick={() => console.log(event)}
-                                    style={{ borderLeft: `2px solid ${eventMeta.color}` }}
+                                    style={{borderLeft: `2px solid ${eventMeta.color}`}}
                                 >
-                                    <div 
+                                    <div
                                         className="event-time-status"
-                                        style={{ backgroundColor: TimeStatusColor[timeStatus]}}>
+                                        style={{backgroundColor: TimeStatusColor[timeStatus]}}>
                                         {timeStatus}
                                     </div>
                                     <p className="event-time">{formatDate(event.startDateTime)}</p>
                                     <div className="event-title-icon">
-                                        <FontAwesomeIcon icon={eventMeta.icon} />
+                                        <FontAwesomeIcon icon={eventMeta.icon}/>
                                         <h4 className="event-title">{event.title}</h4>
                                     </div>
                                     <p className="event-description">Created by You</p>

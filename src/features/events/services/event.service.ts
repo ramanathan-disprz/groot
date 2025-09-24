@@ -1,9 +1,9 @@
-import { ApiService } from "../../../api";
-import { CalendarEvent } from "../dtos";
-import { URLConstants } from "../../../utils/constants";
-import { toDate } from "../../../utils/dates";
+import {ApiService} from "../../../api";
+import {CalendarEvent} from "../dtos";
+import {URLConstants} from "../../../utils/constants";
+import {toDate} from "../../../utils/dates";
 
-import { EventRequest, EventResponse } from "../dtos/event";
+import {EventRequest, EventResponse} from "../dtos/event";
 
 export const EventService = {
 

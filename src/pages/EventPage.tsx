@@ -1,31 +1,30 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {useNavigate} from "react-router-dom";
 
 import {
-    WeekSlider,
-    SingleDayView,
-    MultiDayView,
-    ViewModeToggle,
-    BottomBar,
     AddEventModal,
-    UpdateEventModal
+    BottomBar,
+    MultiDayView,
+    SingleDayView,
+    UpdateEventModal,
+    ViewModeToggle,
+    WeekSlider
 } from "../components/event";
 
 import "../styles/event.scss";
 import EventService from "../features/events/services/event.service";
-import { Header } from "../components/home";
-import { AuthService } from "../features/auth";
-import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
+import {Header} from "../components/home";
+import {AuthService} from "../features/auth";
+import {useKeyboardShortcuts} from "../hooks/useKeyboardShortcuts";
 import ListView from "../components/event/ListView";
-import { addDays } from "../utils/dates";
-import { useQueryClient } from "@tanstack/react-query";
-import { CalendarEvent, ViewMode } from "../features/events/dtos/event.view";
+import {addDays} from "../utils/dates";
+import {CalendarEvent, ViewMode} from "../features/events/dtos/event.view";
 
 type Props = {}
 
-const EventPage: React.FC<Props> = ({ }) => {
+const EventPage: React.FC<Props> = ({}) => {
 
     const navigate = useNavigate();
     const queryClient = useQueryClient();
@@ -43,7 +42,7 @@ const EventPage: React.FC<Props> = ({ }) => {
         l: () => setMode("list")
     });
 
-    const monthName = selectedDate.toLocaleString('default', { month: 'long' });
+    const monthName = selectedDate.toLocaleString('default', {month: 'long'});
 
     function formatDate(date: Date): string {
         return date.toLocaleDateString("en-CA"); // en-CA gives YYYY-MM-DD
@@ -53,12 +52,12 @@ const EventPage: React.FC<Props> = ({ }) => {
         if (mode == "multi") {
             const start = selectedDate;
             const end = addDays(start, 1);
-            return { start, end };
+            return {start, end};
         }
-        return { start: selectedDate, end: selectedDate };
+        return {start: selectedDate, end: selectedDate};
     }
 
-    const { start, end } = getDayWindow(selectedDate, mode);
+    const {start, end} = getDayWindow(selectedDate, mode);
 
     const fetchEvent = useQuery<CalendarEvent[], Error>({
         queryKey: ["events", formatDate(start), formatDate(end)],
@@ -122,7 +121,7 @@ const EventPage: React.FC<Props> = ({ }) => {
     return (
         <>
             <div className="calendar-shell">
-                <Header showLogout={true} onLogout={onLogout} />
+                <Header showLogout={true} onLogout={onLogout}/>
 
                 <header className="calendar-top">
                     <div className="left">
@@ -136,7 +135,7 @@ const EventPage: React.FC<Props> = ({ }) => {
                         />
                     </div>
                     <div className="right">
-                        <ViewModeToggle mode={mode} onChange={(m) => setMode(m)} />
+                        <ViewModeToggle mode={mode} onChange={(m) => setMode(m)}/>
                     </div>
                 </header>
 
@@ -149,16 +148,16 @@ const EventPage: React.FC<Props> = ({ }) => {
                                 <SingleDayView
                                     startDate={selectedDate}
                                     events={fetchEvent.data ?? []}
-                                    onEventClick={handleEventClick} />
+                                    onEventClick={handleEventClick}/>
                             )}
                             {mode === "multi" && (
                                 <MultiDayView
                                     startDate={selectedDate}
                                     events={fetchEvent.data ?? []}
-                                    onEventClick={handleEventClick} />
+                                    onEventClick={handleEventClick}/>
                             )}
                             {mode === "list" && (
-                                <ListView events={fetchEvent.data ?? []} />
+                                <ListView events={fetchEvent.data ?? []}/>
                             )}
                         </>
                     )}
@@ -169,8 +168,9 @@ const EventPage: React.FC<Props> = ({ }) => {
                     onAddEvent={() => setAddEventModalOpen(true)}
                 />
 
-                <AddEventModal open={addEventModalOpen} onClose={() => setAddEventModalOpen(false)} />
-                <UpdateEventModal open={updateEventModalOpen} onClose={() => setUpdateEventModalOpen(false)} currentEvent={selectedEvent} />
+                <AddEventModal open={addEventModalOpen} onClose={() => setAddEventModalOpen(false)}/>
+                <UpdateEventModal open={updateEventModalOpen} onClose={() => setUpdateEventModalOpen(false)}
+                                  currentEvent={selectedEvent}/>
             </div>
         </>
     );

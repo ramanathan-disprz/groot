@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
-import { APIErrorResponse } from "../api";
-import { LoginResponse } from "../features/auth";
+import {LoginResponse} from "../features/auth";
 
 
 export class AuthCookie {

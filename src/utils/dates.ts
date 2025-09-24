@@ -12,7 +12,7 @@ export function addDays(date: Date, days: number) {
 
 // TODO : explore
 export function formatDayLabel(date: Date) {
-    return date.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric' });
+    return date.toLocaleDateString(undefined, {weekday: 'short', day: 'numeric'});
 }
 
 export function isSameDay(date1: Date, date2: Date) {
@@ -22,5 +22,5 @@ export function isSameDay(date1: Date, date2: Date) {
 }
 
 export function toDate(date: string | Date): Date {
-  return date instanceof Date ? date : new Date(date);
+    return date instanceof Date ? date : new Date(date);
 }

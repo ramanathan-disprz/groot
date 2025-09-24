@@ -1,4 +1,4 @@
-import { CalendarEvent } from "../../features/events";
+import {CalendarEvent} from "../../features/events";
 import DayColumn from "./DayColumn";
 
 type Props = {
@@ -7,10 +7,10 @@ type Props = {
     onEventClick: (event: CalendarEvent) => void;
 }
 
-const SingleDayView: React.FC<Props> = ({ startDate, events, onEventClick }) => {
+const SingleDayView: React.FC<Props> = ({startDate, events, onEventClick}) => {
     return (
         <div className="single-day-view">
-            <DayColumn date={startDate} events={events} onEventClick={onEventClick} />
+            <DayColumn date={startDate} events={events} onEventClick={onEventClick}/>
         </div>
     )
 }

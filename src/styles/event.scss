@@ -184,7 +184,7 @@
       font-size: 13px;
       cursor: pointer;
 
-      .title{
+      .title {
         font-weight: 700;
         font-size: 1.1rem;
       }
@@ -331,7 +331,7 @@
   label {
     font-size: 0.9rem;
     margin-bottom: 0.4rem;
-    color: $muted ;
+    color: $muted;
   }
 
   input,
@@ -446,12 +446,12 @@
       background-color: $panel;
       cursor: pointer;
       transition: background-color 0.2s;
-      
+
       &:hover {
         border: 1px solid $muted;
       }
 
-      .event-time-status{
+      .event-time-status {
         width: fit-content;
         color: #fff;
         padding: 4px 8px;
@@ -461,7 +461,7 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
 
-      .event-title-icon{
+      .event-title-icon {
         display: flex;
         align-items: center;
         gap: 0.5rem;

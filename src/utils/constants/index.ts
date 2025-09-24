@@ -1,2 +1,2 @@
-export  * from "./URLConstants";
+export * from "./URLConstants";
 export * from "./EventTypeMetaData";

@@ -1,6 +1,6 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { URLConstants } from "../utils/constants";
-import { AuthCookie } from "../utils/AuthCookie";
+import axios from "axios";
+import {URLConstants} from "../utils/constants";
+import {AuthCookie} from "../utils/AuthCookie";
 
 const axiosInstance = axios.create({
     baseURL: URLConstants.API_BASE_URL,
@@ -17,7 +17,7 @@ axiosInstance.interceptors.request.use(
         if (!isExcluded) {
             const token = AuthCookie.getToken();
             if (token) {
-                config.headers = config.headers || {}; 
+                config.headers = config.headers || {};
                 config.headers['Authorization'] = `Bearer ${token}`;
             }
         }

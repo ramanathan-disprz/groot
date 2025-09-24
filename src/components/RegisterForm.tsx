@@ -1,9 +1,9 @@
-import { useState } from "react";
+import {useState} from "react";
 import toast from "react-hot-toast";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUser} from "@fortawesome/free-solid-svg-icons";
 
-import { RegisterRequest } from "../features/auth";
+import {RegisterRequest} from "../features/auth";
 
 import "../styles/AuthForm.scss";
 
@@ -12,14 +12,14 @@ interface LoginFormProps {
     onLoginClick?: () => void;
 }
 
-export const RegisterForm: React.FC<LoginFormProps> = ({ onSubmit, onLoginClick }) => {
+export const RegisterForm: React.FC<LoginFormProps> = ({onSubmit, onLoginClick}) => {
     const [formData, setFormData] = useState<RegisterRequest>({
         name: "", email: "", password: "", confirmPassword: ""
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setFormData(prev => ({...prev, [name]: value}));
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -53,7 +53,7 @@ export const RegisterForm: React.FC<LoginFormProps> = ({ onSubmit, onLoginClick 
     return (
         <form className="login-form" onSubmit={handleSubmit}>
             <h2 className="login-form__title">
-                <FontAwesomeIcon icon={faUser} className="login-form__icon" /> Register
+                <FontAwesomeIcon icon={faUser} className="login-form__icon"/> Register
             </h2>
 
             <div className="login-form__field">
@@ -103,7 +103,7 @@ export const RegisterForm: React.FC<LoginFormProps> = ({ onSubmit, onLoginClick 
             </div>
             <div className="login-form__register-link">
                 <p>Already have an account? <a href="#" onClick={handleLoginClick}
-                    className="login-form__register-link-text">Login here</a></p>
+                                               className="login-form__register-link-text">Login here</a></p>
             </div>
             <button type="submit" className="login-form__submit">
                 Create Account

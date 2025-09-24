@@ -1,19 +1,15 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import {useNavigate, useSearchParams} from "react-router-dom";
+import {useMutation} from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-import {
-    AuthService,
-    LoginRequest,
-    LoginResponse
-} from "../../features/auth";
+import {AuthService, LoginRequest, LoginResponse} from "../../features/auth";
 
-import { AuthCookie } from "../../utils/AuthCookie";
-import { Footer, Header } from "../../components/home";
+import {AuthCookie} from "../../utils/AuthCookie";
+import {Footer, Header} from "../../components/home";
 import LoginCard from "../../components/auth/LoginCard";
 
 import "./Login.scss";
-import { APIErrorResponse } from "../../api";
+import {APIErrorResponse} from "../../api";
 
 const LoginPage: React.FC = () => {
     const navigate = useNavigate();
@@ -29,7 +25,7 @@ const LoginPage: React.FC = () => {
         onSuccess: (data: LoginResponse) => {
             AuthCookie.setToken(data)
             toast.success("Login successful!");
-            navigate(redirectTo, { replace: true });
+            navigate(redirectTo, {replace: true});
         },
     });
     const handleLogin = (formData: LoginRequest) => {
@@ -43,13 +39,13 @@ const LoginPage: React.FC = () => {
     };
     return (
         <>
-            <Header />
+            <Header/>
             <div className="app">
                 <main className="app__main">
-                    <LoginCard onSubmit={handleLogin} onRegisterClick={handleRegisterClick} />
+                    <LoginCard onSubmit={handleLogin} onRegisterClick={handleRegisterClick}/>
                 </main>
             </div>
-            <Footer />
+            <Footer/>
         </>
     );
 };

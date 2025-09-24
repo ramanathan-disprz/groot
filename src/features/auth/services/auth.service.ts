@@ -1,13 +1,8 @@
-import { ApiService } from "../../../api";
-import { URLConstants } from "../../../utils/constants";
-import {
-    LoginRequest,
-    LoginResponse,
-    RegisterRequest,
-    RegisterResponse
-} from "../";
+import {ApiService} from "../../../api";
+import {URLConstants} from "../../../utils/constants";
+import {LoginRequest, LoginResponse, RegisterRequest, RegisterResponse} from "../";
 
-import { AuthCookie } from "../../../utils/AuthCookie";
+import {AuthCookie} from "../../../utils/AuthCookie";
 
 export const AuthService = {
 

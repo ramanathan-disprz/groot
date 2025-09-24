@@ -1,4 +1,4 @@
-import { ViewMode } from "../../features/events";
+import {ViewMode} from "../../features/events";
 import ToggleGroup from "./ToggleGroup";
 
 type Props = {
@@ -7,12 +7,12 @@ type Props = {
 };
 
 
-const ViewModeToggle: React.FC<Props> = ({ mode, onChange }) => {
+const ViewModeToggle: React.FC<Props> = ({mode, onChange}) => {
 
     const options = [
-        { value: "single" as ViewMode, label: "Single Day" },
-        { value: "multi" as ViewMode, label: "Multi Day" },
-        { value: "list" as ViewMode, label: "List" },
+        {value: "single" as ViewMode, label: "Single Day"},
+        {value: "multi" as ViewMode, label: "Multi Day"},
+        {value: "list" as ViewMode, label: "List"},
     ];
 
     return (
