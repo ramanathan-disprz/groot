@@ -2,14 +2,13 @@ import {useNavigate, useSearchParams} from "react-router-dom";
 import {useMutation} from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-import {AuthService, LoginRequest, LoginResponse} from "../../features/auth";
-
-import {AuthCookie} from "../../utils/AuthCookie";
 import {Footer, Header} from "../../components/home";
 import LoginCard from "../../components/auth/LoginCard";
+import {AuthService, LoginRequest, LoginResponse} from "../../features/auth";
+import {APIErrorResponse} from "../../api";
+import {AuthCookie} from "../../utils/AuthCookie";
 
 import "./Login.scss";
-import {APIErrorResponse} from "../../api";
 
 const LoginPage: React.FC = () => {
     const navigate = useNavigate();

@@ -3,10 +3,11 @@ import toast from "react-hot-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {faTrashCan} from "@fortawesome/free-regular-svg-icons";
-import {EventRequest} from "../../features/events/dtos/event";
+
 import EventTypeToggle from "./EventTypeToggle";
+import {CalendarEvent, EventRequest} from "../../features/events";
+
 import {EventType} from "../../utils/constants";
-import {CalendarEvent} from "../../features/events";
 
 interface UpdateEventFormProps {
     onSubmit: (formData: EventRequest) => void;

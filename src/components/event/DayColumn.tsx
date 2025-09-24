@@ -1,8 +1,10 @@
 import {useMemo} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 import {CalendarEvent} from "../../features/events";
+
 import {isSameDay} from "../../utils/dates";
 import {EVENT_TYPE_META, EventType, EventTypeMeta} from "../../utils/constants";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 type Props = {
     date: Date;

@@ -1,4 +1,5 @@
 import {useNavigate} from "react-router-dom";
+
 import {DateIcon} from "./";
 
 import styles from "../../styles/Hero.module.scss";

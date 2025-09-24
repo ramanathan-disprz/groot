@@ -1,5 +1,5 @@
-import {ViewMode} from "../../features/events";
 import ToggleGroup from "./ToggleGroup";
+import {ViewMode} from "../../features/events";
 
 type Props = {
     mode: ViewMode;

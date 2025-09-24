@@ -2,10 +2,11 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 import {Modal} from "../common";
-import EventService from "../../features/events/services/event.service";
-import {APIErrorResponse} from "../../api";
-import {EventRequest, EventResponse} from "../../features/events/dtos/event";
 import AddEventForm from "./AddEventForm";
+
+import EventService from "../../features/events/services/event.service";
+import {EventRequest, EventResponse} from "../../features/events/dtos/event";
+import {APIErrorResponse} from "../../api";
 
 interface AddEventModalProps {
     open: boolean;

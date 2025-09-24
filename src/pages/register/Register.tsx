@@ -2,11 +2,10 @@ import {useNavigate} from "react-router-dom";
 import {useMutation} from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-import {AuthService, RegisterRequest,} from "../../features/auth";
 import {Footer, Header} from "../../components/home";
 import RegisterCard from "../../components/auth/RegisterCard";
+import {AuthService, RegisterRequest,} from "../../features/auth";
 import {APIErrorResponse} from "../../api";
-
 
 const Register: React.FC = () => {
     const navigate = useNavigate();

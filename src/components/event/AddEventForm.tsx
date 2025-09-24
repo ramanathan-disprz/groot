@@ -1,9 +1,11 @@
 import {useState} from "react";
 import toast from "react-hot-toast";
-import {EventRequest} from "../../features/events/dtos/event";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
+
 import ToggleEventGroup from "./EventTypeToggle";
+import {EventRequest} from "../../features/events/dtos/event";
+
 import {EventType} from "../../utils/constants";
 
 interface AddEventFormProps {

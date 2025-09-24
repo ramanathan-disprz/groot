@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 
 import {LoginRequest} from "../features/auth";
+
 import "../styles/AuthForm.scss";
 
 interface LoginFormProps {

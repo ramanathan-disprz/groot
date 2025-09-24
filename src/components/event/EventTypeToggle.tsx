@@ -1,5 +1,6 @@
-import {EVENT_TYPE_META, EventType} from "../../utils/constants";
 import ToggleGroup from "./ToggleGroup";
+
+import {EVENT_TYPE_META, EventType} from "../../utils/constants";
 
 interface EventTypeToggleProps {
     type: EventType;

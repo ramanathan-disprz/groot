@@ -1,8 +1,9 @@
 import {useState} from "react";
 import toast from "react-hot-toast";
-import {EventRequest, EventResponse} from "../../features/events/dtos/event";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import EventService from "../../features/events/services/event.service";
+
+import {EventService} from "../../features/events/services";
+import {EventRequest, EventResponse} from "../../features/events/dtos";
 import {APIErrorResponse} from "../../api";
 
 interface EventModalProps {

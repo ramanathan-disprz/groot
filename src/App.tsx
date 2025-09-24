@@ -1,9 +1,22 @@
-import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
-import {Toaster} from "react-hot-toast";
-import './App.css';
-import {EventPage, HomePage, LoginPage, RegisterPage,} from './pages';
+import {
+    BrowserRouter as Router,
+    Navigate,
+    Route,
+    Routes
+} from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
+import {
+    EventPage,
+    HomePage,
+    LoginPage,
+    RegisterPage,
+} from './pages';
 
 import BaseRouteGuard from "./components/BaseRouteGuard";
+
+import './App.css';
+
 
 function App() {
     return (

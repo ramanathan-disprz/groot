@@ -12,15 +12,15 @@ import {
     ViewModeToggle,
     WeekSlider
 } from "../components/event";
+import {ListView} from "../components/event";
+import {Header} from "../components/home";
+import {useKeyboardShortcuts} from "../hooks/useKeyboardShortcuts";
+import {AuthService} from "../features/auth";
+import {EventService} from "../features/events/services";
+import {CalendarEvent, ViewMode} from "../features/events/dtos/event.view";
+import {addDays} from "../utils/dates";
 
 import "../styles/event.scss";
-import EventService from "../features/events/services/event.service";
-import {Header} from "../components/home";
-import {AuthService} from "../features/auth";
-import {useKeyboardShortcuts} from "../hooks/useKeyboardShortcuts";
-import ListView from "../components/event/ListView";
-import {addDays} from "../utils/dates";
-import {CalendarEvent, ViewMode} from "../features/events/dtos/event.view";
 
 type Props = {}
 
