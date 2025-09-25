@@ -3,11 +3,12 @@ import toast from "react-hot-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {faTrashCan} from "@fortawesome/free-regular-svg-icons";
+import ToggleEventGroup from "./EventTypeToggle";
 
-import EventTypeToggle from "./EventTypeToggle";
 import {CalendarEvent, EventRequest} from "../../features/events";
 
 import {EventType} from "../../utils/constants";
+import SelectEventType from "./EventTypeSelect";
 
 interface UpdateEventFormProps {
     onSubmit: (formData: EventRequest) => void;
@@ -119,10 +120,19 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({onSubmit, onClose, cur
             </div>
 
             <div className="form-row">
-                <EventTypeToggle
-                    type={formData.type as EventType || "Other"}
-                    onChange={(val) => handleChange({target: {name: "type", value: val}} as any)}
-                />
+                <label htmlFor="eventType">Event Type</label>
+                <div className="toggle-event-group">
+                    <ToggleEventGroup
+                        type={formData.type as EventType || "Other"}
+                        onChange={(val) => handleChange({ target: { name: "type", value: val } } as any)}
+                    />
+                </div>
+                <div className="select-event-type">
+                    <SelectEventType
+                        value={formData.type}
+                        onChange={(value) => setFormData((prev) => ({ ...prev, type: value }))}
+                    />
+                </div>
             </div>
 
 

@@ -7,6 +7,7 @@ import ToggleEventGroup from "./EventTypeToggle";
 import {EventRequest} from "../../features/events/dtos/event";
 
 import {EventType} from "../../utils/constants";
+import SelectEventType from "./EventTypeSelect";
 
 interface AddEventFormProps {
     onSubmit: (formData: EventRequest) => void;
@@ -79,10 +80,19 @@ const AddEventForm: React.FC<AddEventFormProps> = ({onSubmit, onClose}) => {
             </div>
 
             <div className="form-row">
-                <ToggleEventGroup
-                    type={formData.type as EventType || "Other"}
-                    onChange={(val) => handleChange({target: {name: "type", value: val}} as any)}
-                />
+                <label htmlFor="eventType">Event Type</label>
+                <div className="toggle-event-group">
+                    <ToggleEventGroup
+                        type={formData.type as EventType || "Other"}
+                        onChange={(val) => handleChange({ target: { name: "type", value: val } } as any)}
+                    />
+                </div>
+                <div className="select-event-type">
+                    <SelectEventType
+                        value={formData.type}
+                        onChange={(value) => setFormData((prev) => ({ ...prev, type: value }))}
+                    />
+                </div>
             </div>
 
             <div className="form-row">
