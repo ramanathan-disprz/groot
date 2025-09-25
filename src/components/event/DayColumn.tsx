@@ -91,13 +91,7 @@ const DayColumn: React.FC<Props> = ({date, events = [], onEventClick, hourHeight
                             aria-label={`${evt.title} ${timeToString(evt.startDateTime)} - ${timeToString(evt.endDateTime)}`}
                         >
                             <span
-                                style={{
-                                    display: "inline-flex",
-                                    alignItems: "center",
-                                    gap: "0.4rem",
-                                    fontWeight: 600,
-                                    fontSize: "1rem",
-                                }}
+                                className="event-type-content"
                             >
                                 <FontAwesomeIcon icon={eventTypeMeta.icon}/>
                                 {eventTypeMeta.label}
