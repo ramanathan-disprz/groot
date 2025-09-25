@@ -9,11 +9,13 @@
   flex-direction: column;
   height: 100vh;
   padding: 0 1rem;
+  overflow: hidden;
 }
 
 .calendar-top {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 12px 16px;
   gap: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
@@ -125,7 +127,7 @@
 /* Multi-day / single day layout */
 .multi-day-view {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   flex: 1 1 auto;
 }
@@ -515,6 +517,7 @@
 
   .calendar-shell {
     padding: 0 0.5rem;
+    width:auto;
   }
 
   .calendar-top {
@@ -603,6 +606,65 @@
   .view-toggle {
     font-size: 0.7rem;
     padding: 0.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-shell {
+    padding: 0 0.5rem;
+  }
+
+  .calendar-top {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 0;
+
+    .left,
+    .center,
+    .right {
+      width: 100%;
+      text-align: center;
+    }
+
+    .center {
+      justify-content: center;
+    }
+  }
+
+  .calendar-main{
+    flex-direction: column;
+    padding: 8px;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .single-day-view {
+    grid-template-columns: 1fr;
+  }
+
+  .multi-day-view {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .event-pill{
+    padding: 0.4rem;
+    align-items: center;
+
+    .event-type-content {
+      font-size: 0.9rem;
+    }
+
+    .title, .time {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  }
+
+  .day {
+    padding: 4px 10px !important;
   }
 }
 
