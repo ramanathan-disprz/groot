@@ -35,7 +35,7 @@
     justify-content: center;
     align-items: center;
     flex-basis: 100%;
-    margin-left: 6%;
+    // margin-left: 6%;
   }
 
   .right {
@@ -633,6 +633,10 @@
     }
   }
 
+  .day {
+    padding: 4px 6px !important;
+  }
+
   .calendar-main{
     flex-direction: column;
     padding: 8px;
@@ -663,9 +667,7 @@
     }
   }
 
-  .day {
-    padding: 4px 10px !important;
-  }
+  
 }
 
 @media (max-width: 900px) {
