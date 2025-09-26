@@ -65,7 +65,6 @@ const EventModal: React.FC<EventModalProps> = ({open, onClose}) => {
             toast.error("Enter all the details");
             return;
         }
-        console.log(formData)
         const eventRequest = toEventRequest();
         mutation.mutate(eventRequest);
     };

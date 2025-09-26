@@ -18,14 +18,16 @@ interface UpdateEventFormProps {
 }
 
 const UpdateEventForm: React.FC<UpdateEventFormProps> = ({onSubmit, onClose, currentEvent, onDelete}) => {
-    const [formData, setFormData] = useState({
+    
+    const initialFormState = {
         id: '',
         title: '',
         description: '',
         startDateTime: '',
         endDateTime: '',
         type: ''
-    });
+    };
+    const [formData, setFormData] = useState(initialFormState);
 
     function formatDate(dateString: any): string {
         const date = new Date(dateString);
@@ -85,6 +87,7 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({onSubmit, onClose, cur
         }
         const eventRequest = toEventRequest();
         onSubmit(eventRequest);
+        setFormData(initialFormState);
     };
 
     const handleDelete = (e: React.FormEvent) => {

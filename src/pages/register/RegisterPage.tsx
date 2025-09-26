@@ -1,13 +1,13 @@
-import {useNavigate} from "react-router-dom";
-import {useMutation} from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-import {Footer, Header} from "../../components/home";
+import { Footer, Header } from "../../components/home";
 import RegisterCard from "../../components/auth/RegisterCard";
-import {AuthService, RegisterRequest,} from "../../features/auth";
-import {APIErrorResponse} from "../../api";
+import { AuthService, RegisterRequest, } from "../../features/auth";
+import { APIErrorResponse } from "../../api";
 
-const Register: React.FC = () => {
+const RegisterPage: React.FC = () => {
     const navigate = useNavigate();
 
     const mutation = useMutation({
@@ -33,15 +33,15 @@ const Register: React.FC = () => {
     };
     return (
         <>
-            <Header/>
+            <Header />
             <div className="app">
                 <main className="app__main">
-                    <RegisterCard onSubmit={handleRegister} onLoginClick={handleLoginClick}/>
+                    <RegisterCard onSubmit={handleRegister} onLoginClick={handleLoginClick} />
                 </main>
             </div>
-            <Footer/>
+            <Footer />
         </>
     );
 };
 
-export default Register;
+export default RegisterPage;
