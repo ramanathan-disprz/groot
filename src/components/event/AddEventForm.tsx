@@ -16,15 +16,16 @@ interface AddEventFormProps {
 
 const AddEventForm: React.FC<AddEventFormProps> = ({onSubmit, onClose}) => {
 
-    const [formData, setFormData] = useState({
+    const initialFormState = {
         id: '',
         title: '',
         description: '',
         startDateTime: '',
         endDateTime: '',
         type: ''
-    });
-
+    };
+    
+    const [formData, setFormData] = useState(initialFormState);
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
@@ -55,6 +56,7 @@ const AddEventForm: React.FC<AddEventFormProps> = ({onSubmit, onClose}) => {
         console.log(formData)
         const eventRequest = toEventRequest();
         onSubmit(eventRequest);
+        setFormData(initialFormState);
     };
 
     return (

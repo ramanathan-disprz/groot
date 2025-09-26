@@ -1,6 +1,6 @@
 import axios from "axios";
-import {URLConstants} from "../utils/constants";
-import {AuthCookie} from "../utils/AuthCookie";
+import { URLConstants } from "../utils/constants";
+import { AuthCookie } from "../utils/AuthCookie";
 
 const axiosInstance = axios.create({
     baseURL: URLConstants.API_BASE_URL,
@@ -32,6 +32,9 @@ axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
         console.error("API Error:", error.response?.data || error.message);
+        if (error.response?.status === 401 || error.response?.status === 403) {
+            AuthCookie.clearToken();
+        }
         return Promise.reject(error);
     }
 );
