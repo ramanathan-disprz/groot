@@ -1,11 +1,9 @@
-
-
 interface EventBottomBarProps {
     onToday: () => void;
     onAddEvent: () => void;
 }
 
-const EventBottomBar: React.FC<EventBottomBarProps> = ({ onToday, onAddEvent }) => {
+const EventBottomBar: React.FC<EventBottomBarProps> = ({onToday, onAddEvent}) => {
     return (
         <nav className="event-bottom-bar">
             <button className="event-bottom-bar__btn" onClick={onToday}>

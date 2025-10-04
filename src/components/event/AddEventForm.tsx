@@ -1,32 +1,36 @@
-import { useState } from "react";
+import {useState} from "react";
 import toast from "react-hot-toast";
-import { EventRequest } from "../../features/events/dtos/event";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+
 import ToggleEventGroup from "./EventTypeToggle";
-import { EVENT_TYPE_META, EventType } from "../../utils/constants";
+import {EventRequest} from "../../features/events/dtos/event";
+
+import {EventType} from "../../utils/constants";
+import SelectEventType from "./EventTypeSelect";
 
 interface AddEventFormProps {
     onSubmit: (formData: EventRequest) => void;
     onClose: () => void;
 }
 
-const AddEventForm: React.FC<AddEventFormProps> = ({ onSubmit, onClose }) => {
+const AddEventForm: React.FC<AddEventFormProps> = ({onSubmit, onClose}) => {
 
-    const [formData, setFormData] = useState({
+    const initialFormState = {
         id: '',
         title: '',
         description: '',
         startDateTime: '',
         endDateTime: '',
         type: ''
-    });
-
+    };
+    
+    const [formData, setFormData] = useState(initialFormState);
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setFormData((prev) => ({...prev, [name]: value}));
     };
 
     const toEventRequest = (): EventRequest => {
@@ -52,13 +56,14 @@ const AddEventForm: React.FC<AddEventFormProps> = ({ onSubmit, onClose }) => {
         console.log(formData)
         const eventRequest = toEventRequest();
         onSubmit(eventRequest);
+        setFormData(initialFormState);
     };
 
     return (
         <div>
             <header className="event-modal__header">
                 <button className="cancel" onClick={onClose}>
-                    <FontAwesomeIcon icon={faXmark} />
+                    <FontAwesomeIcon icon={faXmark}/>
                 </button>
                 <h2 className="">New Event</h2>
             </header>
@@ -77,10 +82,19 @@ const AddEventForm: React.FC<AddEventFormProps> = ({ onSubmit, onClose }) => {
             </div>
 
             <div className="form-row">
-                <ToggleEventGroup
-                    type={formData.type as EventType || "Other"}  
-                    onChange={(val) => handleChange({ target: { name: "type", value: val } } as any)}
-                />
+                <label htmlFor="eventType">Event Type</label>
+                <div className="toggle-event-group">
+                    <ToggleEventGroup
+                        type={formData.type as EventType || "Other"}
+                        onChange={(val) => handleChange({ target: { name: "type", value: val } } as any)}
+                    />
+                </div>
+                <div className="select-event-type">
+                    <SelectEventType
+                        value={formData.type}
+                        onChange={(value) => setFormData((prev) => ({ ...prev, type: value }))}
+                    />
+                </div>
             </div>
 
             <div className="form-row">

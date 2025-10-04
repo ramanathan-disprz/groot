@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { EventRequest } from "../../features/events/dtos/event";
-import { CalendarEvent } from "../../models";
-import EventTypeToggle from "./EventTypeToggle";
-import { EventType } from "../../utils/constants";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faTrashCan} from "@fortawesome/free-regular-svg-icons";
+import ToggleEventGroup from "./EventTypeToggle";
+
+import {CalendarEvent, EventRequest} from "../../features/events";
+
+import {EventType} from "../../utils/constants";
+import SelectEventType from "./EventTypeSelect";
 
 interface UpdateEventFormProps {
     onSubmit: (formData: EventRequest) => void;
@@ -15,15 +17,17 @@ interface UpdateEventFormProps {
     currentEvent: CalendarEvent | null;
 }
 
-const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, currentEvent, onDelete }) => {
-    const [formData, setFormData] = useState({
+const UpdateEventForm: React.FC<UpdateEventFormProps> = ({onSubmit, onClose, currentEvent, onDelete}) => {
+    
+    const initialFormState = {
         id: '',
         title: '',
         description: '',
         startDateTime: '',
         endDateTime: '',
         type: ''
-    });
+    };
+    const [formData, setFormData] = useState(initialFormState);
 
     function formatDate(dateString: any): string {
         const date = new Date(dateString);
@@ -57,8 +61,8 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, cu
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setFormData((prev) => ({...prev, [name]: value}));
     };
 
     const toEventRequest = (): EventRequest => {
@@ -83,6 +87,7 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, cu
         }
         const eventRequest = toEventRequest();
         onSubmit(eventRequest);
+        setFormData(initialFormState);
     };
 
     const handleDelete = (e: React.FormEvent) => {
@@ -95,12 +100,12 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, cu
             <header className="event-modal__header">
 
                 <button className="cancel" onClick={onClose}>
-                    <FontAwesomeIcon icon={faXmark} />
+                    <FontAwesomeIcon icon={faXmark}/>
                 </button>
                 <h2 className="">Update Event</h2>
 
                 <button className="cancel" onClick={handleDelete}>
-                    <FontAwesomeIcon icon={faTrashCan} />
+                    <FontAwesomeIcon icon={faTrashCan}/>
                 </button>
             </header>
 
@@ -118,10 +123,19 @@ const UpdateEventForm: React.FC<UpdateEventFormProps> = ({ onSubmit, onClose, cu
             </div>
 
             <div className="form-row">
-                <EventTypeToggle
-                    type={formData.type as EventType || "Other"}
-                    onChange={(val) => handleChange({ target: { name: "type", value: val } } as any)}
-                />
+                <label htmlFor="eventType">Event Type</label>
+                <div className="toggle-event-group">
+                    <ToggleEventGroup
+                        type={formData.type as EventType || "Other"}
+                        onChange={(val) => handleChange({ target: { name: "type", value: val } } as any)}
+                    />
+                </div>
+                <div className="select-event-type">
+                    <SelectEventType
+                        value={formData.type}
+                        onChange={(value) => setFormData((prev) => ({ ...prev, type: value }))}
+                    />
+                </div>
             </div>
 
 

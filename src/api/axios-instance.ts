@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import { URLConstants } from "../utils/constants";
 import { AuthCookie } from "../utils/AuthCookie";
 
@@ -17,7 +17,7 @@ axiosInstance.interceptors.request.use(
         if (!isExcluded) {
             const token = AuthCookie.getToken();
             if (token) {
-                config.headers = config.headers || {}; 
+                config.headers = config.headers || {};
                 config.headers['Authorization'] = `Bearer ${token}`;
             }
         }
@@ -32,6 +32,9 @@ axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
         console.error("API Error:", error.response?.data || error.message);
+        if (error.response?.status === 401 || error.response?.status === 403) {
+            AuthCookie.clearToken();
+        }
         return Promise.reject(error);
     }
 );

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import {useState} from "react";
 import toast from "react-hot-toast";
 
-import { LoginRequest } from "../../features/auth";
+import {LoginRequest} from "../../features/auth";
 
 import Logo from "./Logo";
 
@@ -12,12 +12,12 @@ interface LoginFormProps {
     onRegisterClick?: () => void;
 }
 
-const LoginCard: React.FC<LoginFormProps> = ({ onSubmit, onRegisterClick }) => {
-    const [formData, setFormData] = useState<LoginRequest>({ email: "", password: "" });
+const LoginCard: React.FC<LoginFormProps> = ({onSubmit, onRegisterClick}) => {
+    const [formData, setFormData] = useState<LoginRequest>({email: "", password: ""});
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setFormData(prev => ({...prev, [name]: value}));
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -38,7 +38,7 @@ const LoginCard: React.FC<LoginFormProps> = ({ onSubmit, onRegisterClick }) => {
 
     return (
         <section className="login-card">
-            <Logo />
+            <Logo/>
             <h2 className="login-card__title">Sign in with Disprz Account</h2>
             <form className="login-card__form" onSubmit={handleSubmit}>
                 <div className="login-card__input-group">

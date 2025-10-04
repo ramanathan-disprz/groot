@@ -12,12 +12,12 @@ interface ToggleGroupProps<T extends string> {
 }
 
 function ToggleGroup<T extends string>({
-    options,
-    selected,
-    onChange,
-    className = "",
-    ariaLabel,
-}: ToggleGroupProps<T>) {
+                                           options,
+                                           selected,
+                                           onChange,
+                                           className = "",
+                                           ariaLabel,
+                                       }: ToggleGroupProps<T>) {
     return (
         <div className={`toggle-group ${className}`} role="radiogroup" aria-label={ariaLabel}>
             {options.map((opt) => (

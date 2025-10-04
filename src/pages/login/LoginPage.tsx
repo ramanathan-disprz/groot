@@ -1,21 +1,16 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import {useNavigate, useSearchParams} from "react-router-dom";
+import {useMutation} from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-import {
-    AuthService,
-    LoginRequest,
-    APIErrorResponse,
-    LoginResponse
-} from "../../features/auth";
-
-import { AuthCookie } from "../../utils/AuthCookie";
-import { Footer, Header } from "../../components/home";
+import {Footer, Header} from "../../components/home";
 import LoginCard from "../../components/auth/LoginCard";
+import {AuthService, LoginRequest, LoginResponse} from "../../features/auth";
+import {APIErrorResponse} from "../../api";
+import {AuthCookie} from "../../utils/AuthCookie";
 
 import "./Login.scss";
 
-const Login: React.FC = () => {
+const LoginPage: React.FC = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const redirectTo = searchParams.get("redirectTo") || "/events";
@@ -24,12 +19,12 @@ const Login: React.FC = () => {
         mutationFn: AuthService.login,
         onError: (error: any) => {
             const apiError: APIErrorResponse = error.response?.data;
-            toast.error(apiError.Message || "Login Failed");
+            toast.error(apiError.message || "Login Failed");
         },
         onSuccess: (data: LoginResponse) => {
             AuthCookie.setToken(data)
             toast.success("Login successful!");
-            navigate(redirectTo, { replace: true });
+            navigate(redirectTo, {replace: true});
         },
     });
     const handleLogin = (formData: LoginRequest) => {
@@ -43,14 +38,14 @@ const Login: React.FC = () => {
     };
     return (
         <>
-            <Header />
+            <Header/>
             <div className="app">
                 <main className="app__main">
-                    <LoginCard onSubmit={handleLogin} onRegisterClick={handleRegisterClick} />
+                    <LoginCard onSubmit={handleLogin} onRegisterClick={handleRegisterClick}/>
                 </main>
             </div>
-            <Footer />
+            <Footer/>
         </>
     );
 };
-export default Login;
+export default LoginPage;

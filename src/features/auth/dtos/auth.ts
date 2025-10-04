@@ -20,8 +20,3 @@ export interface RegisterResponse {
     email: string;
 }
 
-export interface APIErrorResponse {
-    StatusCode: number;
-    Message: string;
-}
-

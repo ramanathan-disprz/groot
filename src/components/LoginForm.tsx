@@ -1,9 +1,10 @@
-import { useState } from "react";
+import {useState} from "react";
 import toast from "react-hot-toast";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUser} from "@fortawesome/free-solid-svg-icons";
 
-import { LoginRequest } from "../features/auth";
+import {LoginRequest} from "../features/auth";
+
 import "../styles/AuthForm.scss";
 
 interface LoginFormProps {
@@ -11,12 +12,12 @@ interface LoginFormProps {
     onRegisterClick?: () => void;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, onRegisterClick }) => {
-    const [formData, setFormData] = useState<LoginRequest>({ email: "", password: "" });
+export const LoginForm: React.FC<LoginFormProps> = ({onSubmit, onRegisterClick}) => {
+    const [formData, setFormData] = useState<LoginRequest>({email: "", password: ""});
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setFormData(prev => ({...prev, [name]: value}));
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -38,7 +39,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, onRegisterClick 
     return (
         <form className="login-form" onSubmit={handleSubmit}>
             <h2 className="login-form__title">
-                <FontAwesomeIcon icon={faUser} className="login-form__icon" /> Login
+                <FontAwesomeIcon icon={faUser} className="login-form__icon"/> Login
             </h2>
             <div className="login-form__field">
                 <label htmlFor="email">Email</label>
@@ -64,7 +65,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, onRegisterClick 
             </div>
             <div className="login-form__register-link">
                 <p>Don't have an account? <a href="#" onClick={handleRegisterClick}
-                    className="login-form__register-link-text">Register here</a></p>
+                                             className="login-form__register-link-text">Register here</a></p>
             </div>
             <button type="submit" className="login-form__submit">
                 Submit

@@ -1,8 +1,10 @@
-import { useMemo } from "react";
-import { CalendarEvent } from "../../models";
-import { isSameDay } from "../../utils/dates";
-import { EVENT_TYPE_META, EventType, EventTypeMeta } from "../../utils/constants";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useMemo} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
+import {CalendarEvent} from "../../features/events";
+
+import {isSameDay} from "../../utils/dates";
+import {EVENT_TYPE_META, EventType, EventTypeMeta} from "../../utils/constants";
 
 type Props = {
     date: Date;
@@ -16,7 +18,7 @@ function minutesFromStartOfDay(d: Date) {
 }
 
 function timeToString(date: Date) {
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+    return date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', hour12: false});
 }
 
 function calculatePosition(start: Date, end: Date, hourHeight: number) {
@@ -29,7 +31,7 @@ function calculatePosition(start: Date, end: Date, hourHeight: number) {
     const durationInHours = durationInMs / (1000 * 60 * 60);
     const hourLinesDuringEvent = Math.max(0, durationInHours - 1);
     const height = Math.max(0, durationInHours * hourHeight + (hourLinesDuringEvent * 0.9));
-    return { top, height };
+    return {top, height};
 }
 
 export function getEventTypeMeta(type?: string): EventTypeMeta {
@@ -37,7 +39,7 @@ export function getEventTypeMeta(type?: string): EventTypeMeta {
     return EVENT_TYPE_META[key] ?? EVENT_TYPE_META.Other;
 }
 
-const DayColumn: React.FC<Props> = ({ date, events = [], onEventClick, hourHeight = 120 }) => {
+const DayColumn: React.FC<Props> = ({date, events = [], onEventClick, hourHeight = 120}) => {
     const containerHeight = hourHeight * 24;
 
     const dayEvents = useMemo(() => {
@@ -55,51 +57,54 @@ const DayColumn: React.FC<Props> = ({ date, events = [], onEventClick, hourHeigh
 
     return (
         <div className="day-column">
-            <div className="day-header">{date.toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' })}</div>
+            <div className="day-header">{date.toLocaleDateString(undefined, {
+                weekday: 'long',
+                month: 'short',
+                day: 'numeric'
+            })}</div>
 
-            <div className="hours-grid" style={{ height: `${containerHeight}px` }}>
+            <div className="hours-grid" style={{height: `${containerHeight}px`}}>
 
-                {Array.from({ length: 24 }).map((_, h) => (
-                    <div className="hour-row" key={h} style={{ height: `${hourHeight}px` }}>
+                {Array.from({length: 24}).map((_, h) => (
+                    <div className="hour-row" key={h} style={{height: `${hourHeight}px`}}>
                         <div className="hour-label">{String(h).padStart(2, '0')}:00</div>
-                        <div className="hour-line" />
+                        <div className="hour-line"/>
                     </div>
                 ))}
 
                 {dayEvents.map(evt => {
                     const start = evt.startDateTime;
                     const end = evt.endDateTime;
-                    const { top, height } = calculatePosition(start, end, hourHeight);
+                    const {top, height} = calculatePosition(start, end, hourHeight);
                     const eventTypeMeta = getEventTypeMeta(evt.eventType);
                     return (
                         <div
                             key={evt.id}
                             onClick={() => onEventClick(evt)}
                             className="event-pill"
-                            style={{ top: `${top}px`, height: `${Math.max(20, height)}px`, background: eventTypeMeta.color || undefined }}
+                            style={{
+                                top: `${top}px`,
+                                height: `${Math.max(20, height)}px`,
+                                background: eventTypeMeta.color || undefined
+                            }}
                             role="button"
                             aria-label={`${evt.title} ${timeToString(evt.startDateTime)} - ${timeToString(evt.endDateTime)}`}
                         >
                             <span
-                                style={{
-                                    display: "inline-flex",
-                                    alignItems: "center",
-                                    gap: "0.4rem",
-                                    fontWeight: 600,
-                                    fontSize: "1rem",
-                                }}
+                                className="event-type-content"
                             >
-                                <FontAwesomeIcon icon={eventTypeMeta.icon} />
+                                <FontAwesomeIcon icon={eventTypeMeta.icon}/>
                                 {eventTypeMeta.label}
                             </span>
                             <div className="title">{evt.title}</div>
-                            <div className="time">{`${timeToString(evt.startDateTime)} - ${timeToString(evt.endDateTime)}`}</div>
+                            <div
+                                className="time">{`${timeToString(evt.startDateTime)} - ${timeToString(evt.endDateTime)}`}</div>
                         </div>
                     );
                 })}
 
                 {showNow && (
-                    <div className="now-line" style={{ top: `${nowTop}px` }} aria-hidden="true">
+                    <div className="now-line" style={{top: `${nowTop}px`}} aria-hidden="true">
                         <div className="time-bubble">{`${timeToString(now)}`}</div>
                     </div>
                 )}

@@ -1,28 +1,20 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-import {
-    AuthService,
-    RegisterRequest,
-    APIErrorResponse,
-    RegisterResponse
-} from "../../features/auth";
-import {
-    Footer,
-    Header
-} from "../../components/home";
+import { Footer, Header } from "../../components/home";
 import RegisterCard from "../../components/auth/RegisterCard";
+import { AuthService, RegisterRequest, } from "../../features/auth";
+import { APIErrorResponse } from "../../api";
 
-
-const Register: React.FC = () => {
+const RegisterPage: React.FC = () => {
     const navigate = useNavigate();
 
     const mutation = useMutation({
         mutationFn: AuthService.register,
         onError: (error: any) => {
             const apiError: APIErrorResponse = error.response?.data;
-            toast.error(apiError.Message || "Registration Failed");
+            toast.error(apiError.message || "Registration Failed");
         },
         onSuccess(data) {
             toast.success("Registration successful! Please login.");
@@ -52,4 +44,4 @@ const Register: React.FC = () => {
     );
 };
 
-export default Register;
+export default RegisterPage;

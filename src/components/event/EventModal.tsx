@@ -1,19 +1,17 @@
-import { useState } from "react";
+import {useState} from "react";
 import toast from "react-hot-toast";
-import { EventRequest, EventResponse } from "../../features/events/dtos/event";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import EventService from "../../features/events/services/event.service";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 
-import {
-    APIErrorResponse,
-} from "../../features/auth";
+import {EventService} from "../../features/events/services";
+import {EventRequest, EventResponse} from "../../features/events/dtos";
+import {APIErrorResponse} from "../../api";
 
 interface EventModalProps {
     open: boolean;
     onClose: () => void;
 }
 
-const EventModal: React.FC<EventModalProps> = ({ open, onClose }) => {
+const EventModal: React.FC<EventModalProps> = ({open, onClose}) => {
     const [formData, setFormData] = useState({
         id: '',
         title: '',
@@ -27,11 +25,11 @@ const EventModal: React.FC<EventModalProps> = ({ open, onClose }) => {
         mutationFn: EventService.addEvent,
         onError: (error: any) => {
             const apiError: APIErrorResponse = error.response?.data;
-            toast.error(apiError.Message || "Failed to add event");
+            toast.error(apiError.message || "Failed to add event");
         },
         onSuccess: (data: EventResponse) => {
             toast.success("Event added successfully");
-            queryClient.invalidateQueries({ queryKey: ["events"] });
+            queryClient.invalidateQueries({queryKey: ["events"]});
             setFormData({
                 id: '',
                 title: '',
@@ -44,8 +42,8 @@ const EventModal: React.FC<EventModalProps> = ({ open, onClose }) => {
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setFormData(prev => ({...prev, [name]: value}));
     };
 
     const toEventRequest = (): EventRequest => {
@@ -67,7 +65,6 @@ const EventModal: React.FC<EventModalProps> = ({ open, onClose }) => {
             toast.error("Enter all the details");
             return;
         }
-        console.log(formData)
         const eventRequest = toEventRequest();
         mutation.mutate(eventRequest);
     };

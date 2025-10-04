@@ -68,7 +68,7 @@
 .login-form__register-link {
   text-align: center;
   margin: 1rem 0;
-  
+
   p {
     margin: 0;
     font-size: 0.9rem;
@@ -81,18 +81,18 @@
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease, text-decoration 0.2s ease;
-  
+
   &:hover {
     color: #0056b3;
     text-decoration: underline;
   }
-  
+
   &:focus {
     outline: 2px solid #007bff;
     outline-offset: 2px;
     border-radius: 2px;
   }
-  
+
   &:active {
     color: #004085;
   }

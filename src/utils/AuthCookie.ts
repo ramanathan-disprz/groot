@@ -1,7 +1,9 @@
 import Cookies from "js-cookie";
-import { APIErrorResponse, LoginResponse } from "../features/auth";
+import {LoginResponse} from "../features/auth";
+
 
 export class AuthCookie {
+
     private static TOKEN_KEY = "token";
 
     static setToken(data: LoginResponse) {
