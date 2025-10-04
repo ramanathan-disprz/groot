@@ -1,4 +1,5 @@
-import { ViewMode } from "../../models";
+import ToggleGroup from "./ToggleGroup";
+import {ViewMode} from "../../features/events";
 
 type Props = {
     mode: ViewMode;
@@ -6,14 +7,22 @@ type Props = {
 };
 
 
-const ViewModeToggle: React.FC<Props> = ({ mode, onChange }) => {
+const ViewModeToggle: React.FC<Props> = ({mode, onChange}) => {
+
+    const options = [
+        {value: "single" as ViewMode, label: "Single Day"},
+        {value: "multi" as ViewMode, label: "Multi Day"},
+        {value: "list" as ViewMode, label: "List"},
+    ];
 
     return (
-        <div className="view-toggle" role="radiogroup" aria-label="View mode">
-            <button className={mode === 'single' ? 'active' : ''} onClick={() => onChange('single')}>Single Day</button>
-            <button className={mode === 'multi' ? 'active' : ''} onClick={() => onChange('multi')}>Multi Day</button>
-            <button className={mode === 'list' ? 'active' : ''} onClick={() => onChange('list')}>List</button>
-        </div>
+        <ToggleGroup
+            options={options}
+            selected={mode}
+            onChange={onChange}
+            className="view-toggle"
+            ariaLabel="View mode"
+        />
     );
 };
 

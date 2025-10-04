@@ -1,4 +1,4 @@
-export { default as Home } from "./Home";
-export { default as LoginScreen } from "./LoginScreen";
-export { default as RegisterScreen } from "./RegisterScreen";
-export { default as Event } from "./Event";
+export {default as HomePage} from "./HomePage";
+export {default as EventPage} from "./EventPage";
+export {default as LoginPage} from "./login/LoginPage"
+export {default as RegisterPage} from "./register/RegisterPage"

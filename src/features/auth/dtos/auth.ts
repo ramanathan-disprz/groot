@@ -1,5 +1,6 @@
 export interface LoginRequest {
-    email: string; password: string;
+    email: string;
+    password: string;
 }
 
 export interface LoginResponse {
@@ -15,13 +16,7 @@ export interface RegisterRequest {
 }
 
 export interface RegisterResponse {
-
     name: string;
     email: string;
-}
-
-export interface APIErrorResponse {
-    StatusCode: number;
-    Message: string;
 }
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { URLConstants } from "../utils/constants";
+import { AuthCookie } from "../utils/AuthCookie";
 
 const axiosInstance = axios.create({
     baseURL: URLConstants.API_BASE_URL,
@@ -8,11 +9,34 @@ const axiosInstance = axios.create({
     },
 });
 
+axiosInstance.interceptors.request.use(
+    (config) => {
+        const excludedEndpoints = ['/login', '/register'];
+        const isExcluded = excludedEndpoints.some(endpoint => config.url?.includes(endpoint));
+
+        if (!isExcluded) {
+            const token = AuthCookie.getToken();
+            if (token) {
+                config.headers = config.headers || {};
+                config.headers['Authorization'] = `Bearer ${token}`;
+            }
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
 axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
         console.error("API Error:", error.response?.data || error.message);
+        if (error.response?.status === 401 || error.response?.status === 403) {
+            AuthCookie.clearToken();
+        }
         return Promise.reject(error);
     }
 );
-export default axiosInstance;   
+
+export default axiosInstance;
